@@ -3,7 +3,7 @@ package main.java.fr.dauphine.lamsade.hib.ads.servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.naming.InitialContext;
 import javax.servlet.ServletException;
@@ -19,11 +19,14 @@ public class LandingServlet extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     try {
-      DataSource ds = (DataSource) new InitialContext().lookup("jdbc:postgresql://localhost:5432/ads");
-      Connection c = ds.getConnection();
-      PreparedStatement p = c.prepareStatement("select * from users");
-      ResultSet r = p.executeQuery();
-      System.out.println(r);
+      try {
+        DataSource ds = (DataSource) new InitialContext().lookup("jdbc/ads_pg");
+        Connection c = ds.getConnection();
+        PreparedStatement ps = c.prepareStatement("insert into users (fname, lname, email, password) values ('ced', 'ced', 'ced@ced.fr', 'password')");
+        ps.executeQuery();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }

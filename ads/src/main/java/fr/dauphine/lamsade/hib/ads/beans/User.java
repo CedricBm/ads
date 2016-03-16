@@ -1,23 +1,13 @@
 package main.java.fr.dauphine.lamsade.hib.ads.beans;
 
-import java.io.Serializable;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "users")
-public class User implements Serializable {
-  private static final long serialVersionUID = 1L;
-
+// Cédric Beaumont
+public class User {
   private int id;
   private String fname;
   private String lname;
   private String email;
   private String password;
 
-  @Id
   public int getId() {
     return id;
   }
