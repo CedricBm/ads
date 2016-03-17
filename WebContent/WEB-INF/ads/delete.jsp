@@ -1,12 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="layout" tagdir="/WEB-INF/tags/layouts"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 
-</body>
-</html>
+<layout:landing pageTitle="Suppression ad">
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br> <br>
+      <div class="row center">
+        <div class="col s12">
+          <h2 class="header center orange-text">Voulez-vous vraiment supprimer ${ad.description} ?</h2>
+        </div>
+        <div class="col s12">
+          <div class="row">
+            <form class="col s6 offset-s3" method="post">
+              <input id="id" name="id" type="hidden" required aria-required="true" value="${ad.id}">
+              <div class="row">
+                <button class="waves-effect waves-light btn" type="submit">Supprimer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</layout:landing>

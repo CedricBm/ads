@@ -38,15 +38,13 @@ public class AdDao {
   public boolean create(Ad a) {
     try {
       Connection c = ds.getConnection();
-      PreparedStatement ps = c.prepareStatement("insert into ads (price, description, buyable, available_at, is_available, buyer_id, seller_id, footballer_id) values (?,?,?,?,?,?,?,?)");
+      PreparedStatement ps = c.prepareStatement("insert into ads (price, description, buyable, available_at, is_available, buyer_id, seller_id, footballer_id) values (?,?,?,?,TRUE,NULL,?,?)");
       ps.setFloat(1, a.getPrice());
       ps.setString(2, a.getDescription());
       ps.setBoolean(3, a.isBuyable());
       ps.setDate(4, a.getAvailableAt());
-      ps.setBoolean(5, a.isAvailable());
-      ps.setInt(6, a.getBuyerId());
-      ps.setInt(7, a.getSellerId());
-      ps.setInt(8, a.getFootballerId());
+      ps.setInt(5, a.getSellerId());
+      ps.setInt(6, a.getFootballerId());
       ps.executeUpdate();
       c.close();
     } catch (SQLException e) {

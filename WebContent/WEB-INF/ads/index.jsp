@@ -15,22 +15,36 @@
             <form class="col s6 offset-s3 hoverable" method="post">
               <div class="row">
                 <div class="input-field col s6">
-                  <i class="material-icons prefix">account_circle</i> <input id="price" name="price" type="text" class="validate" required aria-required="true"> <label for="price">Prix</label>
+                  <input id="price" name="price" type="text" class="validate" required aria-required="true"> <label for="price">Prix</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <i class="material-icons prefix">email</i> <input id="email" name="email" type="email" class="validate" required aria-required="true"> <label for="email">Email</label>
+                  <input id="description" name="description" type="text" class="validate" required aria-required="true"> <label for="description">Description</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <i class="material-icons prefix">security</i> <input id="password" name="password" type="password" class="validate" required aria-required="true"> <label for="password">Mot
-                    de passe</label>
+                  <input id="buyable" name="buyable" type="text" class="validate" required aria-required="true"> <label for="buyable">Le joueur est achetable</label>
                 </div>
               </div>
               <div class="row">
-                <button class="waves-effect waves-light btn" type="submit">Ajouter un utilisateur</button>
+                <div class="input-field col s12">
+                  <input id="available_at" name="available_at" type="text" class="validate" required aria-required="true"> <label for="available_at">Date où le joueur est disponible (au format jj-mm-aaaa)</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="seller_id" name="seller_id" type="text" class="validate" required aria-required="true"> <label for="seller_id">Id du vendeur</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="club_id" name="club_id" type="text" class="validate" required aria-required="true"> <label for="club_id">Id du club du joueur</label>
+                </div>
+              </div>
+              <div class="row">
+                <button class="waves-effect waves-light btn" type="submit">Ajouter une annonce</button>
               </div>
             </form>
           </div>
@@ -47,22 +61,32 @@
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Email</th>
+                <th>Prix</th>
+                <th>Description</th>
+                <th>Achetable</th>
+                <th>Date dispo</th>
+                <th>Est dispo</th>
+                <th>Acheteur</th>
+                <th>Vendeur</th>
+                <th>Club</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
               </tr>
             </thead>
             <tbody>
-              <c:forEach var="user" items="${users}">
+              <c:forEach var="ad" items="${ads}">
                 <tr>
-                  <td>${user.id}</td>
-                  <td>${user.fname}</td>
-                  <td>${user.lname}</td>
-                  <td>${user.email}</td>
-                  <td><a href="${pageContext.request.contextPath}/user?id=${user.id}" class="waves-effect waves-light btn">Modifier</a></td>
-                  <td><a href="${pageContext.request.contextPath}/user/delete?id=${user.id}" class="waves-effect waves-light btn">Supprimer</a></td>
+                  <td>${ad.id}</td>
+                  <td>${ad.price}</td>
+                  <td>${ad.description}</td>
+                  <td>${ad.buyable}</td>
+                  <td>${ad.availableAt}</td>
+                  <td>${ad.isAvailable}</td>
+                  <td>${ad.buyerId.lname}</td>
+                  <td>${ad.sellerId.lname}</td>
+                  <td>${ad.clubId.name}</td>
+                  <td><a href="${pageContext.request.contextPath}/ads/modify?id=${ad.id}" class="waves-effect waves-light btn">Modifier</a></td>
+                  <td><a href="${pageContext.request.contextPath}/ads/delete?id=${ad.id}" class="waves-effect waves-light btn">Supprimer</a></td>
                 </tr>
               </c:forEach>
             </tbody>
