@@ -5,11 +5,12 @@ import java.sql.Date;
 // Inaki Calzada
 public class Ad {
   private int id;
+  private String title;
   private float price;
   private String description;
   private boolean buyable;
   private Date availableAt;
-  private boolean isAvailable;
+  private boolean available;
 
   private int sellerId;
   private int buyerId;
@@ -21,6 +22,14 @@ public class Ad {
 
   public void setId(int id) {
     this.id = id;
+  }
+  
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
   }
 
   public float getPrice() {
@@ -56,11 +65,11 @@ public class Ad {
   }
 
   public boolean isAvailable() {
-    return isAvailable;
+    return available;
   }
 
   public void setAvailable(boolean isAvailable) {
-    this.isAvailable = isAvailable;
+    this.available = isAvailable;
   }
 
   public int getSellerId() {

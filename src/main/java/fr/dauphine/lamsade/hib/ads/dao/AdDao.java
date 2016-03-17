@@ -38,13 +38,14 @@ public class AdDao {
   public boolean create(Ad a) {
     try {
       Connection c = ds.getConnection();
-      PreparedStatement ps = c.prepareStatement("insert into ads (price, description, buyable, available_at, is_available, buyer_id, seller_id, footballer_id) values (?,?,?,?,TRUE,NULL,?,?)");
-      ps.setFloat(1, a.getPrice());
-      ps.setString(2, a.getDescription());
-      ps.setBoolean(3, a.isBuyable());
-      ps.setDate(4, a.getAvailableAt());
-      ps.setInt(5, a.getSellerId());
-      ps.setInt(6, a.getFootballerId());
+      PreparedStatement ps = c.prepareStatement("insert into ads (title, price, description, buyable, available_at, available, seller_id, footballer_id) values (?,?,?,?,?,TRUE,?,?)");
+      ps.setString(1, a.getTitle());
+      ps.setFloat(2, a.getPrice());
+      ps.setString(3, a.getDescription());
+      ps.setBoolean(4, a.isBuyable());
+      ps.setDate(5, a.getAvailableAt());
+      ps.setInt(6, a.getSellerId());
+      ps.setInt(7, a.getFootballerId());
       ps.executeUpdate();
       c.close();
     } catch (SQLException e) {
@@ -77,16 +78,24 @@ public class AdDao {
   public boolean save(Ad a) {
     try {
       Connection c = ds.getConnection();
-      PreparedStatement ps = c.prepareStatement("update ads set price = ?, description = ?, buyable = ?, available_at = ?, is_available = ?, buyer_id = ?, seller_id = ?, footballer_id = ? where id = ?");
-      ps.setFloat(1, a.getPrice());
-      ps.setString(2, a.getDescription());
-      ps.setBoolean(3, a.isBuyable());
-      ps.setDate(4, a.getAvailableAt());
-      ps.setBoolean(5, a.isAvailable());
-      ps.setInt(6, a.getBuyerId());
-      ps.setInt(7, a.getSellerId());
-      ps.setInt(8, a.getFootballerId());
-      ps.setInt(9, a.getId());
+      PreparedStatement ps = c.prepareStatement("update ads set  title = ?, price = ?, description = ?, buyable = ?, available_at = ?, available = ?," + (a.getBuyerId() == 0 ? "buyer_id = NULL" : " buyer_id = ?") + ", seller_id = ?, footballer_id = ? where id = ?");
+      ps.setString(1, a.getTitle());
+      ps.setFloat(2, a.getPrice());
+      ps.setString(3, a.getDescription());
+      ps.setBoolean(4, a.isBuyable());
+      ps.setDate(5, a.getAvailableAt());
+      ps.setBoolean(6, a.isAvailable());
+      if (a.getBuyerId() == 0) {
+        ps.setInt(7, a.getSellerId());
+        ps.setInt(8, a.getFootballerId());
+        ps.setInt(9, a.getId());
+      } else {
+        ps.setInt(7, a.getBuyerId());
+        ps.setInt(8, a.getSellerId());
+        ps.setInt(9, a.getFootballerId());
+        ps.setInt(10, a.getId());
+      }
+      
       ps.executeUpdate();
       c.close();
     } catch (SQLException e) {
@@ -116,11 +125,12 @@ public class AdDao {
     Ad a = new Ad();
     try {
       a.setId(rs.getInt("id"));
+      a.setTitle(rs.getString("title"));
       a.setPrice(rs.getFloat("price"));
       a.setDescription(rs.getString("description"));
       a.setBuyable(rs.getBoolean("buyable"));
       a.setAvailableAt(rs.getDate("available_at"));
-      a.setBuyable(rs.getBoolean("is_available"));
+      a.setBuyable(rs.getBoolean("available"));
       a.setBuyerId(rs.getInt("buyer_id"));
       a.setSellerId(rs.getInt("seller_id"));
       a.setFootballerId(rs.getInt("footballer_id"));

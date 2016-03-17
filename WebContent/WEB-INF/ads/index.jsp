@@ -13,6 +13,11 @@
         <div class="col s12">
           <div class="row">
             <form class="col s6 offset-s3 hoverable" method="post">
+            <div class="row">
+                <div class="input-field col s6">
+                  <input id="title" name="title" type="text" class="validate" required aria-required="true"> <label for="title">Titre</label>
+                </div>
+              </div>
               <div class="row">
                 <div class="input-field col s6">
                   <input id="price" name="price" type="text" class="validate" required aria-required="true"> <label for="price">Prix</label>
@@ -25,7 +30,7 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="buyable" name="buyable" type="text" class="validate" required aria-required="true"> <label for="buyable">Le joueur est achetable</label>
+                  <input id="buyable" name="buyable" type="text" class="validate" required aria-required="true"> <label for="buyable">Vendre joueur(1) ou louer (0)</label>
                 </div>
               </div>
               <div class="row">
@@ -40,7 +45,7 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="club_id" name="club_id" type="text" class="validate" required aria-required="true"> <label for="club_id">Id du club du joueur</label>
+                  <input id="footballer_id" name="footballer_id" type="text" class="validate" required aria-required="true"> <label for="footballer_id">Id du joueur</label>
                 </div>
               </div>
               <div class="row">
@@ -61,14 +66,15 @@
             <thead>
               <tr>
                 <th>Id</th>
+                <th>Titre</th>
                 <th>Prix</th>
                 <th>Description</th>
                 <th>Achetable</th>
                 <th>Date dispo</th>
-                <th>Est dispo</th>
-                <th>Acheteur</th>
-                <th>Vendeur</th>
-                <th>Club</th>
+                <th>Est Dispo</th>
+                <th>Id Acheteur</th>
+                <th>Id Vendeur</th>
+                <th>Id Joueur</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
               </tr>
@@ -77,14 +83,15 @@
               <c:forEach var="ad" items="${ads}">
                 <tr>
                   <td>${ad.id}</td>
+                  <td>${ad.title}</td>
                   <td>${ad.price}</td>
                   <td>${ad.description}</td>
                   <td>${ad.buyable}</td>
                   <td>${ad.availableAt}</td>
-                  <td>${ad.isAvailable}</td>
-                  <td>${ad.buyerId.lname}</td>
-                  <td>${ad.sellerId.lname}</td>
-                  <td>${ad.clubId.name}</td>
+                  <td>${ad.available}</td>
+                  <td>${ad.buyerId}</td>
+                  <td>${ad.sellerId}</td>
+                  <td>${ad.footballerId}</td>
                   <td><a href="${pageContext.request.contextPath}/ads/modify?id=${ad.id}" class="waves-effect waves-light btn">Modifier</a></td>
                   <td><a href="${pageContext.request.contextPath}/ads/delete?id=${ad.id}" class="waves-effect waves-light btn">Supprimer</a></td>
                 </tr>

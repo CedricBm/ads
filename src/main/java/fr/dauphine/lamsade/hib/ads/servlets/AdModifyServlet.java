@@ -40,7 +40,7 @@ public class AdModifyServlet extends HttpServlet {
 	  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    Ad a = af.getAdForEdit(request);
 	    ad.save(a);
-	    response.sendRedirect("ads");
+	    response.sendRedirect("../ads");
 	  }
 
 }
