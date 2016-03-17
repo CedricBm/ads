@@ -18,7 +18,10 @@
     <div class="nav-wrapper container">
       <a id="logo-container" href="${pageContext.request.contextPath}" class="brand-logo valign-wrapper"><img src="<c:url value="/img/logo.png" />" /></a>
       <ul class="right hide-on-med-and-down">
-        <li><a class="waves-effect waves-light" href="login">Connexion</a></li>
+        <li><a class="waves-effect waves-light" href="${pageContext.request.contextPath}/users">Utilisateurs</a></li>
+        <li><a class="waves-effect waves-light" href="${pageContext.request.contextPath}/clubs">Clubs</a></li>
+        <li><a class="waves-effect waves-light" href="${pageContext.request.contextPath}/footballers">Footballers</a></li>
+        <li><a class="waves-effect waves-light" href="${pageContext.request.contextPath}/ads">Ads</a></li>
       </ul>
     </div>
   </nav>

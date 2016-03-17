@@ -122,5 +122,4 @@ public class Footballer {
   public void setClubId(int clubId) {
     this.clubId = clubId;
   }
-
 }
