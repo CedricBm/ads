@@ -1,8 +1,12 @@
 package main.java.fr.dauphine.lamsade.hib.ads.resources;
 
+import java.util.logging.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 
 public final class Util {
+  private static final Logger LOGGER = Logger.getLogger(Util.class.getCanonicalName());
+
   public static String getInputValue(HttpServletRequest request, String inputName) {
     String value = request.getParameter(inputName);
     if (value == null || value.trim().length() == 0) {
@@ -20,7 +24,7 @@ public final class Util {
       d.update(password.getBytes());
       return new String(d.digest());
     } catch (Throwable ex) {
-      System.err.println("Encryption failed. " + ex);
+      LOGGER.severe("Encryption failed. " + ex);
     }
     return null;
   }
