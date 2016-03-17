@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.User;
 
+// Default transaction isolation level is READ_COMMITED
 public class UserDao {
   private static final Logger LOGGER = Logger.getLogger(UserDao.class.getCanonicalName());
 
@@ -60,6 +61,7 @@ public class UserDao {
     User u = null;
     try {
       Connection c = ds.getConnection();
+      c.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
       PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
       ps.setInt(1, id);
       ResultSet rs = ps.executeQuery();
@@ -78,6 +80,7 @@ public class UserDao {
   public boolean save(User u) {
     try {
       Connection c = ds.getConnection();
+      c.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
       PreparedStatement ps = c.prepareStatement("update users set fname = ?, lname = ?, email = ?" + (u.getPassword() == null ? "" : ", password = ?") + " where id = ?");
       ps.setString(1, u.getFname());
       ps.setString(2, u.getLname());
