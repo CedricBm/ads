@@ -38,11 +38,14 @@ public class ClubDao {
 	  public boolean create(Club club) {
 	    try {
 	      Connection c = ds.getConnection();
-	      PreparedStatement ps = c.prepareStatement("insert into clubs (name, website, nb_trophies, address, country, manager_id) values (?,?,?,?)");
-	      ps.setString(1, u.getFname());
-	      ps.setString(2, u.getLname());
-	      ps.setString(3, u.getEmail());
-	      ps.setString(4, u.getPassword());
+	      PreparedStatement ps = c.prepareStatement("insert into clubs (name, creation_date, website, nb_trophies, address, country, manager_id) values (?,?,?,?,?,?,?)");
+	      ps.setString(1, club.getName());
+	      ps.setDate(2, club.getCreationDate());
+	      ps.setString(3, club.getWebsite());
+	      ps.setInt(4, club.getNbTrophies());
+	      ps.setString(5, club.getAddress());
+	      ps.setString(6, club.getCountry());
+	      ps.setInt(7, club.getManagerId());
 	      ps.executeUpdate();
 	      c.close();
 	    } catch (SQLException e) {
@@ -74,14 +77,15 @@ public class ClubDao {
 	  public boolean save(Club club) {
 	    try {
 	      Connection c = ds.getConnection();
-	      PreparedStatement ps = c.prepareStatement("update clubs set name = ?, website = ?, nb_trophies = ?, address = ?, country = ?, manager_id = ? where id = ?");
+	      PreparedStatement ps = c.prepareStatement("update clubs set name = ?, creation_date = ?, website = ?, nb_trophies = ?, address = ?, country = ?, manager_id = ? where id = ?");
 	      ps.setString(1, club.getName());
-	      ps.setString(2, club.getWebsite());
-	      ps.setInt(3, club.getNbTrophies());
-	      ps.setString(4, club.getAddress());
-	      ps.setString(5,club.getCountry());
-	      ps.setInt(6,club.getManagerId());
-	      ps.setInt(7, club.getId());
+	      ps.setDate(1, club.getCreationDate());
+	      ps.setString(3, club.getWebsite());
+	      ps.setInt(4, club.getNbTrophies());
+	      ps.setString(5, club.getAddress());
+	      ps.setString(6,club.getCountry());
+	      ps.setInt(7,club.getManagerId());
+	      ps.setInt(8, club.getId());
 	      ps.executeUpdate();
 	      c.close();
 	    } catch (SQLException e) {
