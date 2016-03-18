@@ -41,7 +41,14 @@ public class AdServlet extends HttpServlet {
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     Ad a = af.getAd(request);
-    ad.create(a);
+    if (a!=null)
+    {
+      ad.create(a);
+      request.setAttribute("error", null);
+    }else
+    {
+      request.setAttribute("error", 1);
+    }
     LOGGER.info("POST /ads");
     doGet(request, response);
   }

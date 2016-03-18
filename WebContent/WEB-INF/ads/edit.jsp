@@ -10,6 +10,9 @@
         <div class="col s12">
           <h2 class="header center orange-text">Edition d'une annonce</h2>
         </div>
+        <c:if test="${!empty error }">
+          <p>Erreur détectée lors de votre modification !!</p>
+        </c:if>
         <div class="col s12">
           <div class="row">
             <form class="col s6 offset-s3 hoverable" method="post">

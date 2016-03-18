@@ -42,9 +42,18 @@ public class AdModifyServlet extends HttpServlet {
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     Ad a = af.getAdForEdit(request);
-    ad.save(a);
-    LOGGER.info("POST /ads/modify with id: " + a.getId());
-    response.sendRedirect("../ads");
+    if(a!=null)
+    {
+      ad.save(a); 
+      request.setAttribute("error", null);
+      LOGGER.info("POST /ads/modify with id: " + a.getId());
+      response.sendRedirect("../ads");
+    }else
+    {
+      request.setAttribute("error", 1);
+      doGet(request,response);
+    }
+    
   }
 
 }
