@@ -1,6 +1,7 @@
 package main.java.fr.dauphine.lamsade.hib.ads.servlets;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -20,27 +21,30 @@ import main.java.fr.dauphine.lamsade.hib.ads.forms.AdForm;
  */
 @WebServlet("/ads/modify")
 public class AdModifyServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-	  private AdDao ad;
-	  private AdForm af;
+  private static final long serialVersionUID = 1L;
+  private static final Logger LOGGER = Logger.getLogger(UserServlet.class.getCanonicalName());
 
-	  public AdModifyServlet() throws NamingException {
-	    super();
-	    ad = new AdDao((DataSource) new InitialContext().lookup("jdbc/ads"));
-	    af = new AdForm();
-	  }
+  private AdDao ad;
+  private AdForm af;
 
-	  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    Ad a = ad.find(Integer.parseInt(request.getParameter("id")));
-	    request.setAttribute("ad", a);
-	    this.getServletContext().getRequestDispatcher("/WEB-INF/ads/edit.jsp").forward(request, response);
-	  }
+  public AdModifyServlet() throws NamingException {
+    super();
+    ad = new AdDao((DataSource) new InitialContext().lookup("jdbc/ads"));
+    af = new AdForm();
+  }
 
-	  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    Ad a = af.getAdForEdit(request);
-	    ad.save(a);
-	    response.sendRedirect("../ads");
-	  }
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    Ad a = ad.find(Integer.parseInt(request.getParameter("id")));
+    request.setAttribute("ad", a);
+    LOGGER.info("GET /ads/modify with id: " + a.getId());
+    this.getServletContext().getRequestDispatcher("/WEB-INF/ads/edit.jsp").forward(request, response);
+  }
+
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    Ad a = af.getAdForEdit(request);
+    ad.save(a);
+    LOGGER.info("POST /ads/modify with id: " + a.getId());
+    response.sendRedirect("../ads");
+  }
 
 }

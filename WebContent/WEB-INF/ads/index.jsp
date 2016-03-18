@@ -13,7 +13,7 @@
         <div class="col s12">
           <div class="row">
             <form class="col s6 offset-s3 hoverable" method="post">
-            <div class="row">
+              <div class="row">
                 <div class="input-field col s6">
                   <input id="title" name="title" type="text" class="validate" required aria-required="true"> <label for="title">Titre</label>
                 </div>
@@ -35,7 +35,8 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="available_at" name="available_at" type="text" class="validate" required aria-required="true"> <label for="available_at">Date où le joueur est disponible (au format jj-mm-aaaa)</label>
+                  <input id="available_at" name="available_at" type="text" class="validate" required aria-required="true"> <label for="available_at">Date où le joueur est disponible
+                    (au format jj-mm-aaaa)</label>
                 </div>
               </div>
               <div class="row">

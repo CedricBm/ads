@@ -13,8 +13,8 @@
         <div class="col s12">
           <div class="row">
             <form class="col s6 offset-s3 hoverable" method="post">
-            <input id="id" name="id" type="hidden" required aria-required="true" value="${ad.id}">
-            <div class="row">
+              <input id="id" name="id" type="hidden" required aria-required="true" value="${ad.id}">
+              <div class="row">
                 <div class="input-field col s6">
                   <input id="title" name="title" type="text" class="validate" required aria-required="true" value="${ad.title}"> <label for="title">Titre</label>
                 </div>
@@ -31,12 +31,14 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="available_at" name="available_at" type="text" class="validate" required aria-required="true" value="${ad.availableAt}"> <label for="available_at">Date où le joueur est disponible (au format jj-mm-aaaa)</label>
+                  <input id="available_at" name="available_at" type="text" class="validate" required aria-required="true" value="${ad.availableAt}"> <label for="available_at">Date où
+                    le joueur est disponible (au format jj-mm-aaaa)</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="available" name="available" type="text" class="validate" required aria-required="true" value="${ad.available}"> <label for="available">Le joueur est encore dispo</label>
+                  <input id="available" name="available" type="text" class="validate" required aria-required="true" value="${ad.available}"> <label for="available">Le joueur est encore
+                    dispo</label>
                 </div>
               </div>
               <div class="row">
@@ -56,7 +58,8 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="footballer_id" name="footballer_id" type="text" class="validate" required aria-required="true" value="${ad.footballerId}"> <label for="footballer_id">Id du joueur</label>
+                  <input id="footballer_id" name="footballer_id" type="text" class="validate" required aria-required="true" value="${ad.footballerId}"> <label for="footballer_id">Id du
+                    joueur</label>
                 </div>
               </div>
               <div class="row">

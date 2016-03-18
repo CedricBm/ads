@@ -1,6 +1,7 @@
 package main.java.fr.dauphine.lamsade.hib.ads.servlets;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -19,24 +20,27 @@ import main.java.fr.dauphine.lamsade.hib.ads.dao.AdDao;
  */
 @WebServlet("/ads/delete")
 public class AdDeleteServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-	private AdDao ad;
+  private static final long serialVersionUID = 1L;
+  private static final Logger LOGGER = Logger.getLogger(UserDeleteServlet.class.getCanonicalName());
 
-	  public AdDeleteServlet() throws NamingException {
-	    super();
-	    ad = new AdDao((DataSource) new InitialContext().lookup("jdbc/ads"));
-	  }
+  private AdDao ad;
 
-	  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Ad a = ad.find(Integer.parseInt(request.getParameter("id")));
-	    request.setAttribute("ad", a);
-	    this.getServletContext().getRequestDispatcher("/WEB-INF/ads/delete.jsp").forward(request, response);
-	  }
+  public AdDeleteServlet() throws NamingException {
+    super();
+    ad = new AdDao((DataSource) new InitialContext().lookup("jdbc/ads"));
+  }
 
-	  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    ad.delete(Integer.parseInt(request.getParameter("id")));
-	    response.sendRedirect("../ads");
-	  }
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    Ad a = ad.find(Integer.parseInt(request.getParameter("id")));
+    request.setAttribute("ad", a);
+    LOGGER.info("GET /ads/delete with id: " + a.getId());
+    this.getServletContext().getRequestDispatcher("/WEB-INF/ads/delete.jsp").forward(request, response);
+  }
+
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    ad.delete(Integer.parseInt(request.getParameter("id")));
+    LOGGER.info("POST /ads/delete with id: " + request.getParameter("id"));
+    response.sendRedirect("../ads");
+  }
 
 }

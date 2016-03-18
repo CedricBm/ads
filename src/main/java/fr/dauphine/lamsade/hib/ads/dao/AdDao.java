@@ -5,13 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Ad;
 
+//Default transaction isolation level is READ_COMMITED
 public class AdDao {
-  DataSource ds;
+  private DataSource ds;
+
+  private static final Logger LOGGER = Logger.getLogger(UserDao.class.getCanonicalName());
 
   public AdDao(DataSource ds) {
     this.ds = ds;
@@ -28,7 +32,7 @@ public class AdDao {
       }
       c.close();
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.severe("Error while trying to fetch every ads: " + e);
       return null;
     }
 
@@ -38,7 +42,8 @@ public class AdDao {
   public boolean create(Ad a) {
     try {
       Connection c = ds.getConnection();
-      PreparedStatement ps = c.prepareStatement("insert into ads (title, price, description, buyable, available_at, available, seller_id, footballer_id) values (?,?,?,?,?,TRUE,?,?)");
+      PreparedStatement ps = c.prepareStatement(
+          "insert into ads (title, price, description, buyable, available_at, available, seller_id, footballer_id) values (?,?,?,?,?,TRUE,?,?)");
       ps.setString(1, a.getTitle());
       ps.setFloat(2, a.getPrice());
       ps.setString(3, a.getDescription());
@@ -49,7 +54,7 @@ public class AdDao {
       ps.executeUpdate();
       c.close();
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.severe("Error while trying to create an ad: " + e);
       return false;
     }
 
@@ -60,6 +65,7 @@ public class AdDao {
     Ad a = null;
     try {
       Connection c = ds.getConnection();
+      c.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
       PreparedStatement ps = c.prepareStatement("select * from ads where id = ?");
       ps.setInt(1, id);
       ResultSet rs = ps.executeQuery();
@@ -68,7 +74,7 @@ public class AdDao {
       }
       c.close();
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.severe("Error while trying to find an ad: " + e);
       return null;
     }
 
@@ -78,7 +84,11 @@ public class AdDao {
   public boolean save(Ad a) {
     try {
       Connection c = ds.getConnection();
-      PreparedStatement ps = c.prepareStatement("update ads set  title = ?, price = ?, description = ?, buyable = ?, available_at = ?, available = ?," + (a.getBuyerId() == 0 ? "buyer_id = NULL" : " buyer_id = ?") + ", seller_id = ?, footballer_id = ? where id = ?");
+      c.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
+      PreparedStatement ps = c.prepareStatement(
+          "update ads set  title = ?, price = ?, description = ?, buyable = ?, available_at = ?, available = ?,"
+              + (a.getBuyerId() == 0 ? "buyer_id = NULL" : " buyer_id = ?")
+              + ", seller_id = ?, footballer_id = ? where id = ?");
       ps.setString(1, a.getTitle());
       ps.setFloat(2, a.getPrice());
       ps.setString(3, a.getDescription());
@@ -95,11 +105,11 @@ public class AdDao {
         ps.setInt(9, a.getFootballerId());
         ps.setInt(10, a.getId());
       }
-      
+
       ps.executeUpdate();
       c.close();
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.severe("Error while trying to update an ad: " + e);
       return false;
     }
 
@@ -109,12 +119,13 @@ public class AdDao {
   public boolean delete(int id) {
     try {
       Connection c = ds.getConnection();
+      c.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
       PreparedStatement ps = c.prepareStatement("delete from ads where id = ?");
       ps.setInt(1, id);
       ps.executeUpdate();
       c.close();
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.severe("Error while trying to delete an ad: " + e);
       return false;
     }
 
@@ -134,9 +145,9 @@ public class AdDao {
       a.setBuyerId(rs.getInt("buyer_id"));
       a.setSellerId(rs.getInt("seller_id"));
       a.setFootballerId(rs.getInt("footballer_id"));
-      
+
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.severe("Error while trying to map the resultset into an ad: " + e);
       return null;
     }
     return a;

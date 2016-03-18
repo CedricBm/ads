@@ -1,6 +1,7 @@
 package main.java.fr.dauphine.lamsade.hib.ads.servlets;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -20,26 +21,29 @@ import main.java.fr.dauphine.lamsade.hib.ads.forms.AdForm;
  */
 @WebServlet("/ads")
 public class AdServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-	  private AdDao ad;
-	  private AdForm af;
+  private static final long serialVersionUID = 1L;
+  private static final Logger LOGGER = Logger.getLogger(UserServlet.class.getCanonicalName());
 
-	  public AdServlet() throws NamingException {
-	    super();
-	    ad = new AdDao((DataSource) new InitialContext().lookup("jdbc/ads"));
-	    af = new AdForm();
-	  }
+  private AdDao ad;
+  private AdForm af;
 
-	  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    request.setAttribute("ads", ad.all());
-	    this.getServletContext().getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
-	  }
+  public AdServlet() throws NamingException {
+    super();
+    ad = new AdDao((DataSource) new InitialContext().lookup("jdbc/ads"));
+    af = new AdForm();
+  }
 
-	  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    Ad a = af.getAd(request);
-	    ad.create(a);
-	    doGet(request, response);
-	  }
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    request.setAttribute("ads", ad.all());
+    LOGGER.info("GET /ads");
+    this.getServletContext().getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+  }
+
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    Ad a = af.getAd(request);
+    ad.create(a);
+    LOGGER.info("POST /ads");
+    doGet(request, response);
+  }
 
 }
