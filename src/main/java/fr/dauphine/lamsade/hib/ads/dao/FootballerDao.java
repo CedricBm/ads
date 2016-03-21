@@ -5,13 +5,12 @@
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
 	import java.util.ArrayList;
-
 	import javax.sql.DataSource;
-
 	import main.java.fr.dauphine.lamsade.hib.ads.beans.Footballer;
-
+	import java.util.logging.Logger;
 
 	public class FootballerDao {
+		 private static final Logger LOGGER = Logger.getLogger(UserDao.class.getCanonicalName());
 		 DataSource ds;
 
 		  public FootballerDao(DataSource ds) {
@@ -29,7 +28,7 @@
 		      }
 		      c.close();
 		    } catch (SQLException e) {
-		      e.printStackTrace();
+		      LOGGER.severe("Error while trying to fetch every footballers: " + e);
 		      return null;
 		    }
 
@@ -39,7 +38,7 @@
 		  public boolean create(Footballer f) {
 		    try {
 		      Connection c = ds.getConnection();
-		      PreparedStatement ps = c.prepareStatement("insert into footballers ( fname, lname, position, nationality, size, weigh, nb_goals, nb_games, birthdate, nb_games_international, strong_foot, club_id) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+		      PreparedStatement ps = c.prepareStatement("insert into footballers (fname, lname, position, nationality, size, weigh, nb_goals, nb_games, birthdate, nb_games_international, strong_foot, club_id) values (?,?,?,?,?,?,?,?,?,?,?,?)");
 		      ps.setString(1, f.getFname());
 		      ps.setString(2, f.getLname());
 		      ps.setString(3, f.getPosition());
@@ -56,7 +55,7 @@
 		      ps.executeUpdate();
 		      c.close();
 		    } catch (SQLException e) {
-		      e.printStackTrace();
+		        LOGGER.severe("Error while creating footballer: " + e);
 		      return false;
 		    }
 
@@ -67,6 +66,7 @@
 			  Footballer footballer = null;
 		    try {
 		      Connection c = ds.getConnection();
+		      c.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
 		      PreparedStatement ps = c.prepareStatement("select * from footballers where id = ?");
 		      ps.setInt(1, id);
 		      ResultSet rs = ps.executeQuery();
@@ -75,8 +75,8 @@
 		      }
 		      c.close();
 		    } catch (SQLException e) {
-		      e.printStackTrace();
-		      return null;
+		    	LOGGER.severe("Error while trying to find a footballer: " + e);
+		        return null;
 		    }
 		    return footballer;
 		  }
@@ -84,6 +84,7 @@
 		  public boolean save(Footballer f) {
 		    try {
 		      Connection c = ds.getConnection();
+		      c.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
 		      PreparedStatement ps = c.prepareStatement("update footballers set fname = ?, lname = ?, position = ?, nationality = ?, size = ?, weigh = ?, nb_goals = ?, nb_games = ?, birthdate = ?, nb_games_international = ?, strong_foot = ?, club_id = ? where id = ?");
 		      ps.setString(1, f.getFname());
 		      ps.setString(2, f.getLname());
@@ -102,7 +103,7 @@
 		      ps.executeUpdate();
 		      c.close();
 		    } catch (SQLException e) {
-		      e.printStackTrace();
+		     LOGGER.severe("Error when updating a footballer: " + e);
 		      return false;
 		    }
 
@@ -117,7 +118,7 @@
 		      ps.executeUpdate();
 		      c.close();
 		    } catch (SQLException e) {
-		      e.printStackTrace();
+		    	LOGGER.severe("Error while deleting a footballer: " + e);
 		      return false;
 		    }
 
@@ -128,9 +129,9 @@
 			  Footballer f = new Footballer();
 		    try {
 		    f.setId(rs.getInt("id"));
-		    f.setFname(rs.getString(rs.getInt("fname")));
-		    f.setLname(rs.getString(rs.getInt("lname")));
-		    f.setPosition(rs.getString(rs.getInt("position")));
+		    f.setFname(rs.getString("fname"));
+		    f.setLname(rs.getString("lname"));
+		    f.setPosition(rs.getString("position"));
 		    f.setNationality(rs.getString("nationality"));
 		    f.setSize(rs.getFloat("size"));
 		    f.setWeigh(rs.getFloat("weigh"));
@@ -141,7 +142,7 @@
 		    f.setStrongFoot(rs.getString("strong_foot"));	    
 		    f.setClubId(rs.getInt("club_id"));
 		    } catch (SQLException e) {
-		      e.printStackTrace();
+		     LOGGER.severe("Error while mapping the resultset into a footballer: " + e);
 		      return null;
 		    }
 		    return f;
