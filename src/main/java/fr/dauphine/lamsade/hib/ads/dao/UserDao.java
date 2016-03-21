@@ -5,13 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.User;
 
+// Default transaction isolation level is READ_COMMITED
 public class UserDao {
-  DataSource ds;
+  private static final Logger LOGGER = Logger.getLogger(UserDao.class.getCanonicalName());
+
+  private DataSource ds;
 
   public UserDao(DataSource ds) {
     this.ds = ds;
@@ -28,7 +32,7 @@ public class UserDao {
       }
       c.close();
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.severe("Error while trying to fetch every users: " + e);
       return null;
     }
 
@@ -46,7 +50,7 @@ public class UserDao {
       ps.executeUpdate();
       c.close();
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.severe("Error while trying to create a user: " + e);
       return false;
     }
 
@@ -57,6 +61,7 @@ public class UserDao {
     User u = null;
     try {
       Connection c = ds.getConnection();
+      c.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
       PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
       ps.setInt(1, id);
       ResultSet rs = ps.executeQuery();
@@ -65,7 +70,7 @@ public class UserDao {
       }
       c.close();
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.severe("Error while trying to find a user: " + e);
       return null;
     }
 
@@ -75,6 +80,7 @@ public class UserDao {
   public boolean save(User u) {
     try {
       Connection c = ds.getConnection();
+      c.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
       PreparedStatement ps = c.prepareStatement("update users set fname = ?, lname = ?, email = ?" + (u.getPassword() == null ? "" : ", password = ?") + " where id = ?");
       ps.setString(1, u.getFname());
       ps.setString(2, u.getLname());
@@ -88,7 +94,7 @@ public class UserDao {
       ps.executeUpdate();
       c.close();
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.severe("Error while trying to update a user: " + e);
       return false;
     }
 
@@ -103,7 +109,7 @@ public class UserDao {
       ps.executeUpdate();
       c.close();
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.severe("Error while trying to delete a user: " + e);
       return false;
     }
 
@@ -118,7 +124,7 @@ public class UserDao {
       u.setLname(rs.getString("lname"));
       u.setEmail(rs.getString("email"));
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.severe("Error while trying to map the resultset into a user: " + e);
       return null;
     }
     return u;

@@ -1,6 +1,7 @@
 package main.java.fr.dauphine.lamsade.hib.ads.servlets;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -18,6 +19,7 @@ import main.java.fr.dauphine.lamsade.hib.ads.forms.UserForm;
 @WebServlet("/users")
 public class UsersServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  private static final Logger LOGGER = Logger.getLogger(UsersServlet.class.getCanonicalName());
 
   private UserDao ud;
   private UserForm uf;
@@ -30,12 +32,14 @@ public class UsersServlet extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     request.setAttribute("users", ud.all());
+    LOGGER.info("GET /users");
     this.getServletContext().getRequestDispatcher("/WEB-INF/users/index.jsp").forward(request, response);
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     User u = uf.getUser(request);
     ud.create(u);
+    LOGGER.info("POST /users");
     doGet(request, response);
   }
 }

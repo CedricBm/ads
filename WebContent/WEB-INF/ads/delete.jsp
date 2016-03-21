@@ -8,7 +8,7 @@
       <br> <br>
       <div class="row center">
         <div class="col s12">
-          <h2 class="header center orange-text">Voulez-vous vraiment supprimer ${ad.description} ?</h2>
+          <h2 class="header center orange-text">Voulez-vous vraiment supprimer ${ad.title} ?</h2>
         </div>
         <div class="col s12">
           <div class="row">
