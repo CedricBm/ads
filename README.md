@@ -7,6 +7,7 @@ Projet de persistance objet
 - Télécharger et installer [PostgreSQL](http://www.postgresql.org/download/).
 - Créer la base de données "ads" et exécuter le script sql "tables.sql" pour créer les différentes tables.
 - Création de la datasource dans Glassfish:
+  - [Télécharger](https://jdbc.postgresql.org/) et mettre le driver JDBC de postgres dans le dossier lib de Glassfish
   - Lancer le serveur Glassfish
   - Lancer la console Glassfish "asadmin" qui se trouve dans le dossier de Glassfish
   - Exécuter les commandes suivantes en adaptant:
