@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
+import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
 import main.java.fr.dauphine.lamsade.hib.ads.beans.User;
 
 // Default transaction isolation level is READ_COMMITED
@@ -25,7 +26,7 @@ public class UserDao {
     ArrayList<User> users = new ArrayList<>();
     try {
       Connection c = ds.getConnection();
-      PreparedStatement ps = c.prepareStatement("select * from users order by id");
+      PreparedStatement ps = c.prepareStatement("select u.*, c.id as club_id, c.name from users as u left join clubs as c on u.id = c.manager_id order by id");
       ResultSet rs = ps.executeQuery();
       while (rs.next()) {
         users.add(map(rs));
@@ -123,10 +124,17 @@ public class UserDao {
       u.setFname(rs.getString("fname"));
       u.setLname(rs.getString("lname"));
       u.setEmail(rs.getString("email"));
+      if (rs.getString("club_id") != null) {
+        Club c = new Club();
+        c.setId(rs.getInt("club_id"));
+        c.setName(rs.getString("name"));
+        u.setClub(c);
+      }
     } catch (SQLException e) {
       LOGGER.severe("Error while trying to map the resultset into a user: " + e);
       return null;
     }
     return u;
   }
+
 }

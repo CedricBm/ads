@@ -53,6 +53,7 @@
                 <th>Prénom</th>
                 <th>Nom</th>
                 <th>Email</th>
+                <th>Club</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
               </tr>
@@ -64,6 +65,12 @@
                   <td>${user.fname}</td>
                   <td>${user.lname}</td>
                   <td>${user.email}</td>
+                  <td>
+                    <c:choose>
+                      <c:when test="user.club == null">Pas de club</c:when>
+                      <c:otherwise><a href="${pageContext.request.contextPath}/clubs/modify?id=${user.club.id}">${user.club.name}</a></c:otherwise>
+                    </c:choose>
+                  </td>
                   <td><a href="${pageContext.request.contextPath}/user?id=${user.id}" class="waves-effect waves-light btn">Modifier</a></td>
                   <td><a href="${pageContext.request.contextPath}/user/delete?id=${user.id}" class="waves-effect waves-light btn">Supprimer</a></td>
                 </tr>

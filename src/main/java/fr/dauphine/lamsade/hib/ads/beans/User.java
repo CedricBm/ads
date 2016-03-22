@@ -7,6 +7,7 @@ public class User {
   private String lname;
   private String email;
   private String password;
+  private Club club;
 
   public int getId() {
     return id;
@@ -46,5 +47,13 @@ public class User {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public Club getClub() {
+    return club;
+  }
+
+  public void setClub(Club club) {
+    this.club = club;
   }
 }
