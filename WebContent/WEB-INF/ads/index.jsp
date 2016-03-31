@@ -93,9 +93,9 @@
                   <td>${ad.buyable}</td>
                   <td>${ad.availableAt}</td>
                   <td>${ad.available}</td>
-                  <td>${ad.buyerId}</td>
-                  <td>${ad.sellerId}</td>
-                  <td>${ad.footballerId}</td>
+                  <td>${ad.buyer.id}</td>
+                  <td>${ad.seller.id}</td>
+                  <td>${ad.footballer.id}</td>
                   <td><a href="${pageContext.request.contextPath}/ads/modify?id=${ad.id}" class="waves-effect waves-light btn">Modifier</a></td>
                   <td><a href="${pageContext.request.contextPath}/ads/delete?id=${ad.id}" class="waves-effect waves-light btn">Supprimer</a></td>
                 </tr>

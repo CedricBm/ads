@@ -4,11 +4,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Footballer;
+import main.java.fr.dauphine.lamsade.hib.ads.dao.ClubDao;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.FormException;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
@@ -20,6 +22,8 @@ import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 public class FootballerForm {
   @Inject
   private Util util;
+  @EJB
+  private ClubDao cd;
   
   public Footballer getFootballer(HttpServletRequest request) {
     
@@ -43,7 +47,7 @@ public class FootballerForm {
     }
     f.setNbGamesInternational(Integer.parseInt(util.getInputValue(request, "nb_games_international")));
     f.setStrongFoot(util.getInputValue(request, "strong_foot"));
-    f.setClubId(Integer.parseInt(util.getInputValue(request, "club_id")));
+    f.setClub(cd.find(Integer.parseInt(util.getInputValue(request, "club_id"))));
     return f;
   }
   

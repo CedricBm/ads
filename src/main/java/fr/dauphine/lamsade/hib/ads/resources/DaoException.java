@@ -5,10 +5,10 @@ package main.java.fr.dauphine.lamsade.hib.ads.resources;
  * @author Cedric Inaki Mathias Yassine 
  *
  */
-public class MappingException extends RuntimeException {
+public class DaoException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	
-	public MappingException(String msg){
+	public DaoException(String msg){
 		super(msg);
 	}
 }

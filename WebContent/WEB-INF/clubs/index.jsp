@@ -90,7 +90,7 @@
                   <td>${club.creationDate}</td>
                   <td>${club.website}</td>
                   <td>${club.nbTrophies}</td>
-                  <td>${club.managerId}</td>
+                  <td>${club.manager.id}</td>
                   <td><a href="${pageContext.request.contextPath}/clubs/modify?id=${club.id}" class="waves-effect waves-light btn">Modifier</a></td>
                   <td><a href="${pageContext.request.contextPath}/clubs/delete?id=${club.id}" class="waves-effect waves-light btn">Supprimer</a></td>
                 </tr>

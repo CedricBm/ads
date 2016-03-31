@@ -51,17 +51,17 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="buyer_id" name="buyer_id" type="text" class="validate" value="${ad.buyerId}"> <label for="buyer_id">Id de l'acheteur</label>
+                  <input id="buyer_id" name="buyer_id" type="text" class="validate" value="${ad.buyer.id}"> <label for="buyer_id">Id de l'acheteur</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="seller_id" name="seller_id" type="text" class="validate" required aria-required="true" value="${ad.sellerId}"> <label for="seller_id">Id du vendeur</label>
+                  <input id="seller_id" name="seller_id" type="text" class="validate" required aria-required="true" value="${ad.seller.id}"> <label for="seller_id">Id du vendeur</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="footballer_id" name="footballer_id" type="text" class="validate" required aria-required="true" value="${ad.footballerId}"> <label for="footballer_id">Id du
+                  <input id="footballer_id" name="footballer_id" type="text" class="validate" required aria-required="true" value="${ad.footballer.id}"> <label for="footballer_id">Id du
                     joueur</label>
                 </div>
               </div>

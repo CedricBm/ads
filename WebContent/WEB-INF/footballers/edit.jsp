@@ -74,7 +74,7 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="club_id" name="club_id" type="text" class="validate" required aria-required="true" value="${footballer.clubId}"> <label for="club_id">Id du club</label>
+                  <input id="club_id" name="club_id" type="text" class="validate" required aria-required="true" value="${footballer.club.id}"> <label for="club_id">Id du club</label>
                 </div>
               </div>
               <div class="row">

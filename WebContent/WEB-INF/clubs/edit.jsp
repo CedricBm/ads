@@ -49,7 +49,7 @@
               </div>
               <div class="row">
                 <div class="input-field col s6">
-                  <input id="managerId" name="managerId" type="text" class="validate" value="${club.managerId}"> <label for="managerId">Id du responsable</label>
+                  <input id="managerId" name="managerId" type="text" class="validate" value="${club.manager.id}"> <label for="managerId">Id du responsable</label>
                 </div>
               </div>
               <div class="row">

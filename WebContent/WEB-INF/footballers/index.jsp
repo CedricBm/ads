@@ -122,7 +122,7 @@
                   <td>${footballer.birthdate}</td>
                   <td>${footballer.nbGamesInternational}</td>
                   <td>${footballer.strongFoot}</td>
-                  <td>${footballer.clubId}</td>
+                  <td>${footballer.club.id}</td>
                   <td><a href="${pageContext.request.contextPath}/footballers/modify?id=${footballer.id}" class="waves-effect waves-light btn">Modifier</a></td>
                   <td><a href="${pageContext.request.contextPath}/footballers/delete?id=${footballer.id}" class="waves-effect waves-light btn">Supprimer</a></td>
                 </tr>

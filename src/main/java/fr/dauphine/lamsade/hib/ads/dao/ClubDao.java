@@ -1,143 +1,65 @@
 package main.java.fr.dauphine.lamsade.hib.ads.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.annotation.Resource;
 import javax.ejb.Stateless;
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
-import main.java.fr.dauphine.lamsade.hib.ads.resources.MappingException;
+import main.java.fr.dauphine.lamsade.hib.ads.resources.DaoException;
 
 /**
  * @author mathias pereira
  */
-// Default transaction isolation level is READ_COMMITED
 @Stateless
 public class ClubDao {
+  @PersistenceContext(name = "ads")
+  private EntityManager em;
   private static final Logger LOGGER = Logger.getLogger(ClubDao.class.getCanonicalName());
-  @Resource(lookup = "jdbc/ads")
-  private DataSource ds;
   
   public ClubDao() {
   }
   
+  @SuppressWarnings("unchecked")
   public List<Club> all() {
-    List<Club> clubs = new ArrayList<>();
-    try {
-      Connection c = ds.getConnection();
-      PreparedStatement ps = c.prepareStatement("select * from clubs order by id");
-      ResultSet rs = ps.executeQuery();
-      while (rs.next()) {
-        clubs.add(map(rs));
-      }
-      c.close();
-    } catch (SQLException e) {
-      LOGGER.severe("Error while trying to fetch every clubs: " + e);
-      return null;
-    }
-    
-    return clubs;
+    Query query = em.createNamedQuery("Club.all");
+    return (List<Club>) query.getResultList();
   }
   
-  public boolean create(Club club) {
+  public boolean create(Club c) {
     try {
-      Connection c = ds.getConnection();
-      PreparedStatement ps = c.prepareStatement(
-          "insert into clubs (name, creation_date, website, nb_trophies, address, country, manager_id) values (?,?,?,?,?,?,?)");
-      ps.setString(1, club.getName());
-      ps.setDate(2, club.getCreationDate());
-      ps.setString(3, club.getWebsite());
-      ps.setInt(4, club.getNbTrophies());
-      ps.setString(5, club.getAddress());
-      ps.setString(6, club.getCountry());
-      ps.setInt(7, club.getManagerId());
-      ps.executeUpdate();
-      c.close();
-    } catch (SQLException e) {
-      LOGGER.severe("Error while trying to create a club: " + e);
-      return false;
+      em.persist(c);
+      em.flush();
+    } catch (Exception e) {
+      throw new DaoException("Error while trying to create an club: " + e);
     }
     
     return true;
   }
   
   public Club find(int id) {
-    Club club = null;
-    try {
-      Connection c = ds.getConnection();
-      PreparedStatement ps = c.prepareStatement("select * from clubs where id = ?");
-      ps.setInt(1, id);
-      ResultSet rs = ps.executeQuery();
-      if (rs.next()) {
-        club = map(rs);
-      }
-      c.close();
-    } catch (SQLException e) {
-      LOGGER.severe("Error while trying to find a club: " + e);
-      return null;
-    }
-    return club;
+    return em.find(Club.class, id);
   }
   
-  public boolean save(Club club) {
+  public boolean save(Club c) {
     try {
-      Connection c = ds.getConnection();
-      PreparedStatement ps = c.prepareStatement(
-          "update clubs set name = ?, creation_date = ?, website = ?, nb_trophies = ?, address = ?, country = ?, manager_id = ? where id = ?");
-      ps.setString(1, club.getName());
-      ps.setDate(2, club.getCreationDate());
-      ps.setString(3, club.getWebsite());
-      ps.setInt(4, club.getNbTrophies());
-      ps.setString(5, club.getAddress());
-      ps.setString(6, club.getCountry());
-      ps.setInt(7, club.getManagerId());
-      ps.setInt(8, club.getId());
-      ps.executeUpdate();
-      c.close();
-    } catch (SQLException e) {
-      LOGGER.severe("Error while trying to update a club: " + e);
+      em.merge(c);
+    } catch (Exception e) {
+      LOGGER.severe("Error while trying to save an club: " + e);
       return false;
     }
-    
     return true;
   }
   
   public boolean delete(int id) {
-    try {
-      Connection c = ds.getConnection();
-      PreparedStatement ps = c.prepareStatement("delete from clubs where id = ?");
-      ps.setInt(1, id);
-      ps.executeUpdate();
-      c.close();
-    } catch (SQLException e) {
-      LOGGER.severe("Error while trying to delete a club: " + e);
-      return false;
+    Club c = find(id);
+    if (c != null) {
+      em.remove(c);
+      return true;
     }
-    
-    return true;
-  }
-  
-  private Club map(ResultSet rs) {
-    Club c = new Club();
-    try {
-      c.setId(rs.getInt("id"));
-      c.setName(rs.getString("name"));
-      c.setCreationDate(rs.getDate("creation_date"));
-      c.setWebsite(rs.getString("website"));
-      c.setNbTrophies(rs.getInt("nb_trophies"));
-      c.setAddress(rs.getString("address"));
-      c.setCountry(rs.getString("country"));
-      c.setManagerId(rs.getInt("manager_id"));
-    } catch (SQLException e) {
-      throw new MappingException("Error while trying to map the resultset into an club: " + e);
-    }
-    return c;
+    return false;
   }
 }

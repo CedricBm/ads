@@ -4,11 +4,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
+import main.java.fr.dauphine.lamsade.hib.ads.dao.UserDao;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.FormException;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
@@ -19,6 +21,8 @@ import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 public class ClubForm {
   @Inject
   private Util util;
+  @EJB
+  private UserDao ud;
   
   public Club getClub(HttpServletRequest request) {
     
@@ -29,7 +33,7 @@ public class ClubForm {
       club.setAddress(util.getInputValue(request, "address"));
       club.setWebsite(util.getInputValue(request, "website"));
       club.setNbTrophies(Integer.parseInt(util.getInputValue(request, "nbTrophies")));
-      club.setManagerId(Integer.parseInt(util.getInputValue(request, "managerId")));
+      club.setManager(ud.find(Integer.parseInt(util.getInputValue(request, "managerId"))));
       SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
       Date parsedDate;
       parsedDate = dateFormat.parse(util.getInputValue(request, "creationDate"));

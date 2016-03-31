@@ -4,11 +4,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Ad;
+import main.java.fr.dauphine.lamsade.hib.ads.dao.FootballerDao;
+import main.java.fr.dauphine.lamsade.hib.ads.dao.UserDao;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.FormException;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
@@ -20,6 +23,10 @@ import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 public class AdForm {
   @Inject
   private Util util;
+  @EJB
+  private UserDao ud;
+  @EJB
+  private FootballerDao fd;
   
   public Ad getAd(HttpServletRequest request) {
     
@@ -39,10 +46,10 @@ public class AdForm {
       ad.setAvailable(Boolean.parseBoolean(util.getInputValue(request, "available")));
       
       if (util.getInputValue(request, "buyer_id") != null)
-        ad.setBuyerId(Integer.parseInt(util.getInputValue(request, "buyer_id")));
+        ad.setBuyer(ud.find(Integer.parseInt(util.getInputValue(request, "buyer_id"))));
       
-      ad.setSellerId(Integer.parseInt(util.getInputValue(request, "seller_id")));
-      ad.setFootballerId(Integer.parseInt(util.getInputValue(request, "footballer_id")));
+      ad.setSeller(ud.find(Integer.parseInt(util.getInputValue(request, "seller_id"))));
+      ad.setFootballer(fd.find(Integer.parseInt(util.getInputValue(request, "footballer_id"))));
     } catch (ParseException e) {
       throw new FormException("Error while trying parse information from request ads: " + e);
     }

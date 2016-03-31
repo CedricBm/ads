@@ -1,13 +1,13 @@
 package main.java.fr.dauphine.lamsade.hib.ads.resources;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author cedric beaumont
  */
 
-@Stateless
+@ApplicationScoped
 public class Util {
   
   public String getInputValue(HttpServletRequest request, String inputName) {

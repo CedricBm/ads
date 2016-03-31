@@ -2,11 +2,23 @@ package main.java.fr.dauphine.lamsade.hib.ads.beans;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
 /**
- * 
  * @author inaki calzada
- *
  */
+@Entity
+@Table(name = "ads")
+@NamedQueries({ @NamedQuery(name = "Ad.all", query = "select a from Ad a") })
 public class Ad {
   private int id;
   private String title;
@@ -15,15 +27,16 @@ public class Ad {
   private boolean buyable;
   private Date availableAt;
   private boolean available;
-
-  private int sellerId;
-  private int buyerId;
-  private int footballerId;
-
+  private User seller;
+  private User buyer;
+  private Footballer footballer;
+  
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   public int getId() {
     return id;
   }
-
+  
   public void setId(int id) {
     this.id = id;
   }
@@ -31,72 +44,79 @@ public class Ad {
   public String getTitle() {
     return title;
   }
-
+  
   public void setTitle(String title) {
     this.title = title;
   }
-
+  
   public float getPrice() {
     return price;
   }
-
+  
   public void setPrice(float price) {
     this.price = price;
   }
-
+  
   public String getDescription() {
     return description;
   }
-
+  
   public void setDescription(String description) {
     this.description = description;
   }
-
+  
   public boolean isBuyable() {
     return buyable;
   }
-
+  
   public void setBuyable(boolean buyable) {
     this.buyable = buyable;
   }
-
+  
+  @Column(name = "available_at")
   public Date getAvailableAt() {
     return availableAt;
   }
-
+  
   public void setAvailableAt(Date availableAt) {
     this.availableAt = availableAt;
   }
-
+  
   public boolean isAvailable() {
     return available;
   }
-
+  
   public void setAvailable(boolean isAvailable) {
     this.available = isAvailable;
   }
-
-  public int getSellerId() {
-    return sellerId;
+  
+  @ManyToOne
+  @JoinColumn(name = "seller_id")
+  public User getSeller() {
+    return seller;
   }
-
-  public void setSellerId(int sellerId) {
-    this.sellerId = sellerId;
+  
+  public void setSeller(User seller) {
+    this.seller = seller;
   }
-
-  public int getBuyerId() {
-    return buyerId;
+  
+  @ManyToOne
+  @JoinColumn(name = "buyer_id")
+  public User getBuyer() {
+    return buyer;
   }
-
-  public void setBuyerId(int buyerId) {
-    this.buyerId = buyerId;
+  
+  public void setBuyer(User buyer) {
+    this.buyer = buyer;
   }
-
-  public int getFootballerId() {
-    return footballerId;
+  
+  @ManyToOne
+  @JoinColumn(name = "footballer_id")
+  public Footballer getFootballer() {
+    return footballer;
   }
-
-  public void setFootballerId(int footballerId) {
-    this.footballerId = footballerId;
+  
+  public void setFootballer(Footballer footballer) {
+    this.footballer = footballer;
   }
 }
