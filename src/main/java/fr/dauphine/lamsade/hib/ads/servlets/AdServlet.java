@@ -19,6 +19,11 @@ import main.java.fr.dauphine.lamsade.hib.ads.forms.AdForm;
 /**
  * Servlet implementation class AdServlet
  */
+/**
+ * 
+ * @author inaki calzada
+ *
+ */
 @WebServlet("/ads")
 public class AdServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;

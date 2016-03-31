@@ -10,6 +10,11 @@ import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.ClubDao;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
+/**
+ * 
+ * @author mathias pereira
+ *
+ */
 public class ClubForm {
 	 private static final Logger CLUB_FORM_LOGGER = Logger.getLogger(ClubDao.class.getCanonicalName());
 

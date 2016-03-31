@@ -16,6 +16,11 @@ import main.java.fr.dauphine.lamsade.hib.ads.beans.User;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.UserDao;
 import main.java.fr.dauphine.lamsade.hib.ads.forms.UserForm;
 
+/**
+ * 
+ * @author cedric beaumont
+ *
+ */
 @WebServlet("/users")
 public class UsersServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;

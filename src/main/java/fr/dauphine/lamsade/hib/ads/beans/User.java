@@ -1,6 +1,10 @@
 package main.java.fr.dauphine.lamsade.hib.ads.beans;
 
-// Cédric Beaumont
+/**
+ * 
+ * @author cedric beaumont
+ *
+ */
 public class User {
   private int id;
   private String fname;

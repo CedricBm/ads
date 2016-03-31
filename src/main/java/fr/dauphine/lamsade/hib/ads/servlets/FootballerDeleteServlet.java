@@ -15,6 +15,11 @@ import javax.sql.DataSource;
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Footballer;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.FootballerDao;
 
+/**
+ * 
+ * @author yassine ramrani
+ *
+ */
 @WebServlet("/footballers/delete")
 public class FootballerDeleteServlet extends HttpServlet{
 	  private static final long serialVersionUID = 1L;

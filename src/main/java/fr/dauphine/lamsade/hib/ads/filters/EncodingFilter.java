@@ -12,6 +12,11 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 
+ * @author cedric beaumont
+ *
+ */
 // Encodes every request to UTF-8 format. Allows special characters (e.g. accents) when submitting a form
 @WebFilter("/*")
 public class EncodingFilter implements Filter {

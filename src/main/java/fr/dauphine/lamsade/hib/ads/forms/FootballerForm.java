@@ -10,6 +10,11 @@ import main.java.fr.dauphine.lamsade.hib.ads.beans.Footballer;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.UserDao;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
+/**
+ * 
+ * @author yassine ramrani
+ *
+ */
 public class FootballerForm {
 
 	  private static final Logger LOGGER = Logger.getLogger(UserDao.class.getCanonicalName());	

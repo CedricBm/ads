@@ -2,7 +2,11 @@ package main.java.fr.dauphine.lamsade.hib.ads.beans;
 
 import java.sql.Date;
 
-// Mathias Pereira
+/**
+ * 
+ * @author mathias pereira
+ *
+ */
 public class Club {
   private int id;
   private String name;

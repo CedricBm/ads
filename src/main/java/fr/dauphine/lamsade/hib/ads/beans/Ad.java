@@ -2,7 +2,11 @@ package main.java.fr.dauphine.lamsade.hib.ads.beans;
 
 import java.sql.Date;
 
-// Inaki Calzada
+/**
+ * 
+ * @author inaki calzada
+ *
+ */
 public class Ad {
   private int id;
   private String title;

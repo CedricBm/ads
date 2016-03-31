@@ -10,6 +10,11 @@ import main.java.fr.dauphine.lamsade.hib.ads.beans.Ad;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.UserDao;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
+/**
+ * 
+ * @author inaki calzada
+ *
+ */
 public class AdForm {
   private static final Logger LOGGER = Logger.getLogger(UserDao.class.getCanonicalName());
 

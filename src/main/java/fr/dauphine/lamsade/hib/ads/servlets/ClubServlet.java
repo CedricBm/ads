@@ -14,6 +14,11 @@ import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.ClubDao;
 import main.java.fr.dauphine.lamsade.hib.ads.forms.ClubForm;
 
+/**
+ * 
+ * @author mathias pereira
+ *
+ */
 @WebServlet("/clubs")
 public class ClubServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

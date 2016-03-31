@@ -5,6 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import main.java.fr.dauphine.lamsade.hib.ads.beans.User;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
+/**
+ * 
+ * @author cedric beaumont
+ *
+ */
 public class UserForm {
 
   public User getUser(HttpServletRequest request) {

@@ -18,6 +18,11 @@ import main.java.fr.dauphine.lamsade.hib.ads.forms.FootballerForm;
 /**
  * Servlet implementation class FootballerServlet
  */
+/**
+ * 
+ * @author yassine ramrani
+ *
+ */
 @WebServlet("/footballers")
 public class FootballerServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;

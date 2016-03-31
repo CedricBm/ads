@@ -18,6 +18,11 @@ import main.java.fr.dauphine.lamsade.hib.ads.dao.AdDao;
 /**
  * Servlet implementation class AdDeleteServlet
  */
+/**
+ * 
+ * @author inaki calzada
+ *
+ */
 @WebServlet("/ads/delete")
 public class AdDeleteServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;

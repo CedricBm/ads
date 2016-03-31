@@ -14,7 +14,11 @@ import javax.sql.DataSource;
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.ClubDao;
 
-
+/**
+ * 
+ * @author mathias pereira
+ *
+ */
 @WebServlet("/clubs/delete")
 public class ClubDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

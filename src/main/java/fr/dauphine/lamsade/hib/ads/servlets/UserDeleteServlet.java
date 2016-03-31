@@ -15,6 +15,11 @@ import javax.sql.DataSource;
 import main.java.fr.dauphine.lamsade.hib.ads.beans.User;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.UserDao;
 
+/**
+ * 
+ * @author cedric beaumont
+ *
+ */
 @WebServlet("/user/delete")
 public class UserDeleteServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;

@@ -2,7 +2,11 @@ package main.java.fr.dauphine.lamsade.hib.ads.beans;
 
 import java.sql.Date;
 
-// Yassine Ramrami
+/**
+ * 
+ * @author yassine ramrani
+ *
+ */
 public class Footballer {
   private int id;
   private String fname;

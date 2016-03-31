@@ -12,6 +12,11 @@ import javax.sql.DataSource;
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
 import main.java.fr.dauphine.lamsade.hib.ads.beans.User;
 
+/**
+ * 
+ * @author cedric beaumont
+ *
+ */
 // Default transaction isolation level is READ_COMMITED
 public class UserDao {
   private static final Logger LOGGER = Logger.getLogger(UserDao.class.getCanonicalName());

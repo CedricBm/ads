@@ -11,6 +11,11 @@ import javax.sql.DataSource;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
 
+/**
+ * 
+ * @author mathias pereira
+ *
+ */
 //Default transaction isolation level is READ_COMMITED
 public class ClubDao {
 	private static final Logger CLUB_DAO_LOGGER = Logger.getLogger(ClubDao.class.getCanonicalName());

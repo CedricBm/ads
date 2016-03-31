@@ -15,6 +15,11 @@ import main.java.fr.dauphine.lamsade.hib.ads.beans.Footballer;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.FootballerDao;
 import main.java.fr.dauphine.lamsade.hib.ads.forms.FootballerForm;
 
+/**
+ * 
+ * @author yassine ramrani
+ *
+ */
 @WebServlet("/footballers/modify")
 public class FootballerModifyServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;

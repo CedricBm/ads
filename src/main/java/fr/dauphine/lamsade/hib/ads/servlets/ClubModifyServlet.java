@@ -18,6 +18,11 @@ import main.java.fr.dauphine.lamsade.hib.ads.forms.ClubForm;
 /**
  * Servlet implementation class ClubModifyServlet
  */
+/**
+ * 
+ * @author mathias pereira
+ *
+ */
 @WebServlet("/clubs/modify")
 public class ClubModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

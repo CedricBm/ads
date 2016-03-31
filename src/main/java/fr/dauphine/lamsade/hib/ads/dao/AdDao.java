@@ -11,6 +11,11 @@ import javax.sql.DataSource;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Ad;
 
+/**
+ * 
+ * @author inaki calzada
+ *
+ */
 //Default transaction isolation level is READ_COMMITED
 public class AdDao {
   private DataSource ds;

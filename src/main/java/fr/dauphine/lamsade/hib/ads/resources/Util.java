@@ -4,6 +4,11 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 
+ * @author cedric beaumont
+ *
+ */
 public final class Util {
   private static final Logger LOGGER = Logger.getLogger(Util.class.getCanonicalName());
 
