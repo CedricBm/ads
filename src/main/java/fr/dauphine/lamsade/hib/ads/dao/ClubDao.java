@@ -18,7 +18,7 @@ import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
  */
 //Default transaction isolation level is READ_COMMITED
 public class ClubDao {
-	private static final Logger CLUB_DAO_LOGGER = Logger.getLogger(ClubDao.class.getCanonicalName());
+	private static final Logger LOGGER = Logger.getLogger(ClubDao.class.getCanonicalName());
 	DataSource ds;
 
 	public ClubDao(DataSource ds) {
@@ -36,7 +36,7 @@ public class ClubDao {
 			}
 			c.close();
 		} catch (SQLException e) {
-			CLUB_DAO_LOGGER.severe("Error while trying to fetch every clubs: " + e);
+			LOGGER.severe("Error while trying to fetch every clubs: " + e);
 			return null;
 		}
 
@@ -57,7 +57,7 @@ public class ClubDao {
 			ps.executeUpdate();
 			c.close();
 		} catch (SQLException e) {
-			CLUB_DAO_LOGGER.severe("Error while trying to create a club: " + e);
+			LOGGER.severe("Error while trying to create a club: " + e);
 			return false;
 		}
 
@@ -76,7 +76,7 @@ public class ClubDao {
 			}
 			c.close();
 		} catch (SQLException e) {
-			CLUB_DAO_LOGGER.severe("Error while trying to find a club: " + e);
+			LOGGER.severe("Error while trying to find a club: " + e);
 			return null;
 		}
 		return club;
@@ -97,7 +97,7 @@ public class ClubDao {
 			ps.executeUpdate();
 			c.close();
 		} catch (SQLException e) {
-			CLUB_DAO_LOGGER.severe("Error while trying to update a club: " + e);
+			LOGGER.severe("Error while trying to update a club: " + e);
 			return false;
 		}
 
@@ -112,7 +112,7 @@ public class ClubDao {
 			ps.executeUpdate();
 			c.close();
 		} catch (SQLException e) {
-			CLUB_DAO_LOGGER.severe("Error while trying to delete a club: " + e);
+			LOGGER.severe("Error while trying to delete a club: " + e);
 			return false;
 		}
 
@@ -131,7 +131,7 @@ public class ClubDao {
 			c.setCountry(rs.getString("country"));
 			c.setManagerId(rs.getInt("manager_id"));
 		} catch (SQLException e) {
-			CLUB_DAO_LOGGER.severe("Error while trying to map the resultset into a club: " + e);
+			LOGGER.severe("Error while trying to map the resultset into a club: " + e);
 			return null;
 		}
 		return c;

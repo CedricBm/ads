@@ -22,7 +22,7 @@ import main.java.fr.dauphine.lamsade.hib.ads.dao.ClubDao;
 @WebServlet("/clubs/delete")
 public class ClubDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger CLUB_DELETE_SERVLET_LOGGER = Logger.getLogger(ClubDeleteServlet.class.getCanonicalName());
+	private static final Logger LOGGER = Logger.getLogger(ClubDeleteServlet.class.getCanonicalName());
 	private ClubDao clubDao;
 
 	public ClubDeleteServlet() throws NamingException {
@@ -33,13 +33,13 @@ public class ClubDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Club club = clubDao.find(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("club", club);
-		CLUB_DELETE_SERVLET_LOGGER.info("GET /clubs/delete with id: " + club.getId());
+		LOGGER.info("GET /clubs/delete with id: " + club.getId());
 		this.getServletContext().getRequestDispatcher("/WEB-INF/clubs/delete.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		clubDao.delete(Integer.parseInt(request.getParameter("id")));
-	    CLUB_DELETE_SERVLET_LOGGER.info("POST /clubs/delete with id: " + request.getParameter("id"));
+	    LOGGER.info("POST /clubs/delete with id: " + request.getParameter("id"));
 	    response.sendRedirect("../clubs");
 	}
 

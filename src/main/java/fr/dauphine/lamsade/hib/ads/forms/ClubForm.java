@@ -16,7 +16,7 @@ import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
  *
  */
 public class ClubForm {
-	 private static final Logger CLUB_FORM_LOGGER = Logger.getLogger(ClubDao.class.getCanonicalName());
+	 private static final Logger LOGGER = Logger.getLogger(ClubDao.class.getCanonicalName());
 
 	  public Club getClub(HttpServletRequest request) {
 
@@ -34,7 +34,7 @@ public class ClubForm {
 	      java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
 	      club.setCreationDate(sqlDate);
 	    } catch (Exception e) {
-	    	CLUB_FORM_LOGGER.severe("Error while trying parse information from request ads: " + e);
+	    	LOGGER.severe("Error while trying parse information from request ads: " + e);
 	      return null;
 	    }
 	    return club;

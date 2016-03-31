@@ -26,7 +26,7 @@ import main.java.fr.dauphine.lamsade.hib.ads.forms.ClubForm;
 @WebServlet("/clubs/modify")
 public class ClubModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger CLUB_MODIFY_SERVLET_LOGGER = Logger.getLogger(ClubModifyServlet.class.getCanonicalName());
+	private static final Logger LOGGER = Logger.getLogger(ClubModifyServlet.class.getCanonicalName());
 	private ClubDao clubDao;
 	private ClubForm clubForm;
 
@@ -39,7 +39,7 @@ public class ClubModifyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Club club = clubDao.find(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("club", club);
-		CLUB_MODIFY_SERVLET_LOGGER.info("GET /clubs/modify with id: " + club.getId());
+		LOGGER.info("GET /clubs/modify with id: " + club.getId());
 		this.getServletContext().getRequestDispatcher("/WEB-INF/clubs/edit.jsp").forward(request, response);
 	}
 
@@ -49,7 +49,7 @@ public class ClubModifyServlet extends HttpServlet {
 		{
 			clubDao.save(club); 
 			request.setAttribute("error", null);
-			CLUB_MODIFY_SERVLET_LOGGER.info("POST /clubs/modify with id: " + club.getId());
+			LOGGER.info("POST /clubs/modify with id: " + club.getId());
 			response.sendRedirect("../clubs");
 		}else
 		{
