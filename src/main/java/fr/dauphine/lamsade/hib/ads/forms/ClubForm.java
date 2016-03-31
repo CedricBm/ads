@@ -3,34 +3,36 @@ package main.java.fr.dauphine.lamsade.hib.ads.forms;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Logger;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
-import main.java.fr.dauphine.lamsade.hib.ads.dao.ClubDao;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.FormException;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
 /**
  * @author mathias pereira
  */
+@Stateless
 public class ClubForm {
-  private static final Logger LOGGER = Logger.getLogger(ClubDao.class.getCanonicalName());
+  @Inject
+  private Util util;
   
   public Club getClub(HttpServletRequest request) {
     
     Club club = new Club();
     try {
-      club.setName(Util.getInputValue(request, "name"));
-      club.setCountry(Util.getInputValue(request, "country"));
-      club.setAddress(Util.getInputValue(request, "address"));
-      club.setWebsite(Util.getInputValue(request, "website"));
-      club.setNbTrophies(Integer.parseInt(Util.getInputValue(request, "nbTrophies")));
-      club.setManagerId(Integer.parseInt(Util.getInputValue(request, "managerId")));
+      club.setName(util.getInputValue(request, "name"));
+      club.setCountry(util.getInputValue(request, "country"));
+      club.setAddress(util.getInputValue(request, "address"));
+      club.setWebsite(util.getInputValue(request, "website"));
+      club.setNbTrophies(Integer.parseInt(util.getInputValue(request, "nbTrophies")));
+      club.setManagerId(Integer.parseInt(util.getInputValue(request, "managerId")));
       SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
       Date parsedDate;
-      parsedDate = dateFormat.parse(Util.getInputValue(request, "creationDate"));
+      parsedDate = dateFormat.parse(util.getInputValue(request, "creationDate"));
       java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
       club.setCreationDate(sqlDate);
     } catch (ParseException e) {
@@ -42,7 +44,7 @@ public class ClubForm {
   public Club getClubForEdit(HttpServletRequest request) {
     Club club = getClub(request);
     if (club != null)
-      club.setId(Integer.parseInt(Util.getInputValue(request, "id")));
+      club.setId(Integer.parseInt(util.getInputValue(request, "id")));
     return club;
   }
 }

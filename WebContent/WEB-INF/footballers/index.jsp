@@ -117,12 +117,12 @@
                   <td>${footballer.nationality}</td>
                   <td>${footballer.size}</td>
                   <td>${footballer.weigh}</td>
-                  <td>${footballer.nb_goals}</td>
-                  <td>${footballer.nb_games}</td>
-                  <td>${footballer.birthday}</td>
-                  <td>${footballer.nb_games_international}</td>
-                  <td>${footballer.strong_foot}</td>
-                  <td>${footballer.clubId.name}</td>
+                  <td>${footballer.nbGoals}</td>
+                  <td>${footballer.nbGames}</td>
+                  <td>${footballer.birthdate}</td>
+                  <td>${footballer.nbGamesInternational}</td>
+                  <td>${footballer.strongFoot}</td>
+                  <td>${footballer.clubId}</td>
                   <td><a href="${pageContext.request.contextPath}/footballers/modify?id=${footballer.id}" class="waves-effect waves-light btn">Modifier</a></td>
                   <td><a href="${pageContext.request.contextPath}/footballers/delete?id=${footballer.id}" class="waves-effect waves-light btn">Supprimer</a></td>
                 </tr>

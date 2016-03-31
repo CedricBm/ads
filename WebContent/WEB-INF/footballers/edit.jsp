@@ -49,12 +49,12 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="nb_goals" name="nb_goals" type="text" class="validate" required aria-required="true" value="${footballer.nb_goals}"> <label for="nb_goals">Nombre de buts</label>
+                  <input id="nb_goals" name="nb_goals" type="text" class="validate" required aria-required="true" value="${footballer.nbGoals}"> <label for="nb_goals">Nombre de buts</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="nb_games" name="nb_games" type="text" class="validate" required aria-required="true" value="${footballer.nb_games}"> <label for="nb_games">Nombre de matchs joués</label>
+                  <input id="nb_games" name="nb_games" type="text" class="validate" required aria-required="true" value="${footballer.nbGames}"> <label for="nb_games">Nombre de matchs joués</label>
                 </div>
               </div>
               <div class="row">
@@ -64,17 +64,17 @@
               </div>                                          
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="nb_games_international" name="nb_games_international" type="text" class="validate" required aria-required="true" value="${footballer.nb_games_international}"> <label for="nb_games_international">Nombre de matchs joués avec son équipe nationale</label>
+                  <input id="nb_games_international" name="nb_games_international" type="text" class="validate" required aria-required="true" value="${footballer.nbGamesInternational}"> <label for="nb_games_international">Nombre de matchs joués avec son équipe nationale</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="strong_foot" name="strong_foot" type="text" class="validate" required aria-required="true" value="${footballer.strong_foot}"> <label for="strong_foot">Son pied le plus fort</label>
+                  <input id="strong_foot" name="strong_foot" type="text" class="validate" required aria-required="true" value="${footballer.strongFoot}"> <label for="strong_foot">Son pied le plus fort</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="club_id" name="club_id" type="text" class="validate" required aria-required="true" value="${footballer.club_id}"> <label for="club_id">Id du club</label>
+                  <input id="club_id" name="club_id" type="text" class="validate" required aria-required="true" value="${footballer.clubId}"> <label for="club_id">Id du club</label>
                 </div>
               </div>
               <div class="row">

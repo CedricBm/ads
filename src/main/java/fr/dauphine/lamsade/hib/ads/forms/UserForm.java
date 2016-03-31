@@ -1,31 +1,35 @@
 package main.java.fr.dauphine.lamsade.hib.ads.forms;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.User;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
 /**
- * 
  * @author cedric beaumont
- *
  */
-public class UserForm {
 
+@Stateless
+public class UserForm {
+  @Inject
+  private Util util;
+  
   public User getUser(HttpServletRequest request) {
     User user = new User();
-    user.setLname(Util.getInputValue(request, "lname"));
-    user.setFname(Util.getInputValue(request, "fname"));
-    user.setEmail(Util.getInputValue(request, "email"));
-    user.setPassword(Util.encrypt(Util.getInputValue(request, "password")));
-
+    user.setLname(util.getInputValue(request, "lname"));
+    user.setFname(util.getInputValue(request, "fname"));
+    user.setEmail(util.getInputValue(request, "email"));
+    user.setPassword(util.encrypt(util.getInputValue(request, "password")));
+    
     return user;
   }
-
+  
   public User getUserForEdit(HttpServletRequest request) {
     User user = getUser(request);
-    user.setId(Integer.parseInt(Util.getInputValue(request, "id")));
-
+    user.setId(Integer.parseInt(util.getInputValue(request, "id")));
+    
     return user;
   }
 }

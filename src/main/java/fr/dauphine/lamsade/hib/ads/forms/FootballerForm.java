@@ -3,51 +3,53 @@ package main.java.fr.dauphine.lamsade.hib.ads.forms;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Logger;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Footballer;
-import main.java.fr.dauphine.lamsade.hib.ads.dao.UserDao;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.FormException;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
 /**
- * @author yassine ramrani
+ * @author yassine ramrami
  */
+
+@Stateless
 public class FootballerForm {
-  
-  private static final Logger LOGGER = Logger.getLogger(UserDao.class.getCanonicalName());
+  @Inject
+  private Util util;
   
   public Footballer getFootballer(HttpServletRequest request) {
     
     Footballer f = new Footballer();
-    f.setFname(Util.getInputValue(request, "fname"));
-    f.setLname(Util.getInputValue(request, "lname"));
-    f.setPosition(Util.getInputValue(request, "position"));
-    f.setNationality(Util.getInputValue(request, "nationality"));
-    f.setSize(Float.parseFloat(Util.getInputValue(request, "size")));
-    f.setWeigh(Float.parseFloat(Util.getInputValue(request, "weigh")));
-    f.setNbGoals(Integer.parseInt(Util.getInputValue(request, "nb_goals")));
-    f.setNbGames(Integer.parseInt(Util.getInputValue(request, "nb_games")));
+    f.setFname(util.getInputValue(request, "fname"));
+    f.setLname(util.getInputValue(request, "lname"));
+    f.setPosition(util.getInputValue(request, "position"));
+    f.setNationality(util.getInputValue(request, "nationality"));
+    f.setSize(Float.parseFloat(util.getInputValue(request, "size")));
+    f.setWeigh(Float.parseFloat(util.getInputValue(request, "weigh")));
+    f.setNbGoals(Integer.parseInt(util.getInputValue(request, "nb_goals")));
+    f.setNbGames(Integer.parseInt(util.getInputValue(request, "nb_games")));
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
     Date parsed;
     try {
-      parsed = format.parse(Util.getInputValue(request, "birthdate"));
+      parsed = format.parse(util.getInputValue(request, "birthdate"));
       java.sql.Date sql = new java.sql.Date(parsed.getTime());
       f.setBirthdate(sql);
     } catch (ParseException e) {
       throw new FormException("Error while trying parse information from request footballers: " + e);
     }
-    f.setNbGamesInternational(Integer.parseInt(Util.getInputValue(request, "nb_games_international")));
-    f.setStrongFoot(Util.getInputValue(request, "strong_foot"));
-    f.setClubId(Integer.parseInt(Util.getInputValue(request, "club_id")));
+    f.setNbGamesInternational(Integer.parseInt(util.getInputValue(request, "nb_games_international")));
+    f.setStrongFoot(util.getInputValue(request, "strong_foot"));
+    f.setClubId(Integer.parseInt(util.getInputValue(request, "club_id")));
     return f;
   }
   
   public Footballer getFootballerForEdit(HttpServletRequest request) {
     Footballer f = getFootballer(request);
-    f.setId(Integer.parseInt(Util.getInputValue(request, "id")));
+    f.setId(Integer.parseInt(util.getInputValue(request, "id")));
     
     return f;
   }

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.sql.DataSource;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
@@ -18,13 +20,15 @@ import main.java.fr.dauphine.lamsade.hib.ads.resources.MappingException;
  * @author cedric beaumont
  */
 // Default transaction isolation level is READ_COMMITED
+
+@Stateless
 public class UserDao {
   private static final Logger LOGGER = Logger.getLogger(UserDao.class.getCanonicalName());
-  
+  @Resource(lookup = "jdbc/ads")
   private DataSource ds;
   
-  public UserDao(DataSource ds) {
-    this.ds = ds;
+  public UserDao() {
+    
   }
   
   public List<User> all() {
@@ -35,7 +39,7 @@ public class UserDao {
           "select u.*, c.id as club_id, c.name from users as u left join clubs as c on u.id = c.manager_id order by id");
       ResultSet rs = ps.executeQuery();
       while (rs.next()) {
-        users.add(map(rs));
+        users.add(map(rs, true));
       }
       c.close();
     } catch (SQLException e) {
@@ -73,7 +77,7 @@ public class UserDao {
       ps.setInt(1, id);
       ResultSet rs = ps.executeQuery();
       if (rs.next()) {
-        u = map(rs);
+        u = map(rs, false);
       }
       c.close();
     } catch (SQLException e) {
@@ -124,14 +128,14 @@ public class UserDao {
     return true;
   }
   
-  private User map(ResultSet rs) {
+  private User map(ResultSet rs, boolean withClub) {
     User u = new User();
     try {
       u.setId(rs.getInt("id"));
       u.setFname(rs.getString("fname"));
       u.setLname(rs.getString("lname"));
       u.setEmail(rs.getString("email"));
-      if (rs.getString("club_id") != null) {
+      if (withClub && rs.getString("club_id") != null) {
         Club c = new Club();
         c.setId(rs.getInt("club_id"));
         c.setName(rs.getString("name"));

@@ -9,27 +9,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.sql.DataSource;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Footballer;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.MappingException;
 
 /**
- * @author yassine ramrani
+ * @author yassine ramrami
  */
+
+@Stateless
 public class FootballerDao {
   private static final Logger LOGGER = Logger.getLogger(UserDao.class.getCanonicalName());
-  DataSource ds;
+  @Resource(lookup = "jdbc/ads")
+  private DataSource ds;
   
-  public FootballerDao(DataSource ds) {
-    this.ds = ds;
+  public FootballerDao() {
   }
   
   public List<Footballer> all() {
     List<Footballer> footballers = new ArrayList<>();
     try {
       Connection c = ds.getConnection();
-      PreparedStatement ps = c.prepareStatement("select * from footballer order by id");
+      PreparedStatement ps = c.prepareStatement("select * from footballers order by id");
       ResultSet rs = ps.executeQuery();
       while (rs.next()) {
         footballers.add(map(rs));

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.sql.DataSource;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
@@ -17,12 +19,13 @@ import main.java.fr.dauphine.lamsade.hib.ads.resources.MappingException;
  * @author mathias pereira
  */
 // Default transaction isolation level is READ_COMMITED
+@Stateless
 public class ClubDao {
   private static final Logger LOGGER = Logger.getLogger(ClubDao.class.getCanonicalName());
-  DataSource ds;
+  @Resource(lookup = "jdbc/ads")
+  private DataSource ds;
   
-  public ClubDao(DataSource ds) {
-    this.ds = ds;
+  public ClubDao() {
   }
   
   public List<Club> all() {

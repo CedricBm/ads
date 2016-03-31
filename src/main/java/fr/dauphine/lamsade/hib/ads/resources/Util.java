@@ -1,16 +1,16 @@
 package main.java.fr.dauphine.lamsade.hib.ads.resources;
 
-import java.util.logging.Logger;
-
+import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author cedric beaumont
  */
-public final class Util {
-  private static final Logger LOGGER = Logger.getLogger(Util.class.getCanonicalName());
+
+@Stateless
+public class Util {
   
-  public static String getInputValue(HttpServletRequest request, String inputName) {
+  public String getInputValue(HttpServletRequest request, String inputName) {
     String value = request.getParameter(inputName);
     if (value == null || value.trim().length() == 0) {
       return null;
@@ -19,7 +19,7 @@ public final class Util {
     }
   }
   
-  public static String encrypt(String password) {
+  public String encrypt(String password) {
     try {
       java.security.MessageDigest d = null;
       d = java.security.MessageDigest.getInstance("SHA-256");
