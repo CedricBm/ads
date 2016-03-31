@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.sql.DataSource;
@@ -26,8 +27,8 @@ public class UserDao {
     this.ds = ds;
   }
   
-  public ArrayList<User> all() {
-    ArrayList<User> users = new ArrayList<>();
+  public List<User> all() {
+    List<User> users = new ArrayList<>();
     try {
       Connection c = ds.getConnection();
       PreparedStatement ps = c.prepareStatement(

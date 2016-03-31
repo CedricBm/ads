@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.sql.DataSource;
@@ -25,8 +26,8 @@ public class AdDao {
     this.ds = ds;
   }
   
-  public ArrayList<Ad> all() {
-    ArrayList<Ad> ads = new ArrayList<>();
+  public List<Ad> all() {
+    List<Ad> ads = new ArrayList<>();
     try {
       Connection c = ds.getConnection();
       PreparedStatement ps = c.prepareStatement("select * from ads order by id");
