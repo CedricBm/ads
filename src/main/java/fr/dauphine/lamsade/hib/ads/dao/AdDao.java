@@ -10,22 +10,21 @@ import java.util.logging.Logger;
 import javax.sql.DataSource;
 
 import main.java.fr.dauphine.lamsade.hib.ads.beans.Ad;
+import main.java.fr.dauphine.lamsade.hib.ads.resources.MappingException;
 
 /**
- * 
  * @author inaki calzada
- *
  */
-//Default transaction isolation level is READ_COMMITED
+// Default transaction isolation level is READ_COMMITED
 public class AdDao {
   private DataSource ds;
-
+  
   private static final Logger LOGGER = Logger.getLogger(UserDao.class.getCanonicalName());
-
+  
   public AdDao(DataSource ds) {
     this.ds = ds;
   }
-
+  
   public ArrayList<Ad> all() {
     ArrayList<Ad> ads = new ArrayList<>();
     try {
@@ -40,10 +39,10 @@ public class AdDao {
       LOGGER.severe("Error while trying to fetch every ads: " + e);
       return null;
     }
-
+    
     return ads;
   }
-
+  
   public boolean create(Ad a) {
     try {
       Connection c = ds.getConnection();
@@ -62,10 +61,10 @@ public class AdDao {
       LOGGER.severe("Error while trying to create an ad: " + e);
       return false;
     }
-
+    
     return true;
   }
-
+  
   public Ad find(int id) {
     Ad a = null;
     try {
@@ -82,10 +81,10 @@ public class AdDao {
       LOGGER.severe("Error while trying to find an ad: " + e);
       return null;
     }
-
+    
     return a;
   }
-
+  
   public boolean save(Ad a) {
     try {
       Connection c = ds.getConnection();
@@ -110,17 +109,17 @@ public class AdDao {
         ps.setInt(9, a.getFootballerId());
         ps.setInt(10, a.getId());
       }
-
+      
       ps.executeUpdate();
       c.close();
     } catch (SQLException e) {
       LOGGER.severe("Error while trying to update an ad: " + e);
       return false;
     }
-
+    
     return true;
   }
-
+  
   public boolean delete(int id) {
     try {
       Connection c = ds.getConnection();
@@ -133,10 +132,10 @@ public class AdDao {
       LOGGER.severe("Error while trying to delete an ad: " + e);
       return false;
     }
-
+    
     return true;
   }
-
+  
   private Ad map(ResultSet rs) {
     Ad a = new Ad();
     try {
@@ -150,10 +149,8 @@ public class AdDao {
       a.setBuyerId(rs.getInt("buyer_id"));
       a.setSellerId(rs.getInt("seller_id"));
       a.setFootballerId(rs.getInt("footballer_id"));
-
     } catch (SQLException e) {
-      LOGGER.severe("Error while trying to map the resultset into an ad: " + e);
-      return null;
+      throw new MappingException("Error while trying to map the resultset into an ad: " + e);
     }
     return a;
   }
