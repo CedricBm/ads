@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.ClubDao;
+import main.java.fr.dauphine.lamsade.hib.ads.entities.Club;
 
 /**
  * @author mathias pereira

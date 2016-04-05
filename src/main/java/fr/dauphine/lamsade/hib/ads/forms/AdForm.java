@@ -6,12 +6,11 @@ import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import main.java.fr.dauphine.lamsade.hib.ads.beans.Ad;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.FootballerDao;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.UserDao;
+import main.java.fr.dauphine.lamsade.hib.ads.entities.Ad;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.FormException;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
@@ -21,7 +20,7 @@ import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
 @Stateless
 public class AdForm {
-  @Inject
+  @EJB
   private Util util;
   @EJB
   private UserDao ud;
@@ -58,8 +57,9 @@ public class AdForm {
   
   public Ad getAdForEdit(HttpServletRequest request) {
     Ad ad = getAd(request);
-    if (ad != null)
+    if (ad != null) {
       ad.setId(Integer.parseInt(util.getInputValue(request, "id")));
+    }
     return ad;
   }
 }

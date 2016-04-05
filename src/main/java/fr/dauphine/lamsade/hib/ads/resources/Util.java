@@ -1,13 +1,13 @@
 package main.java.fr.dauphine.lamsade.hib.ads.resources;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author cedric beaumont
  */
 
-@ApplicationScoped
+@Stateless
 public class Util {
   
   public String getInputValue(HttpServletRequest request, String inputName) {
@@ -19,13 +19,13 @@ public class Util {
     }
   }
   
-  public String encrypt(String password) {
+  public byte[] encrypt(String password) {
     try {
       java.security.MessageDigest d = null;
       d = java.security.MessageDigest.getInstance("SHA-256");
       d.reset();
       d.update(password.getBytes());
-      return new String(d.digest());
+      return d.digest();
     } catch (Throwable ex) {
       throw new RuntimeException("Password encryption error");
     }

@@ -1,10 +1,10 @@
 package main.java.fr.dauphine.lamsade.hib.ads.forms;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import main.java.fr.dauphine.lamsade.hib.ads.beans.User;
+import main.java.fr.dauphine.lamsade.hib.ads.entities.User;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
 /**
@@ -13,7 +13,7 @@ import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
 @Stateless
 public class UserForm {
-  @Inject
+  @EJB
   private Util util;
   
   public User getUser(HttpServletRequest request) {
@@ -29,7 +29,6 @@ public class UserForm {
   public User getUserForEdit(HttpServletRequest request) {
     User user = getUser(request);
     user.setId(Integer.parseInt(util.getInputValue(request, "id")));
-    
     return user;
   }
 }

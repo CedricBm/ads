@@ -6,11 +6,10 @@ import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.UserDao;
+import main.java.fr.dauphine.lamsade.hib.ads.entities.Club;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.FormException;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
@@ -19,7 +18,7 @@ import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
  */
 @Stateless
 public class ClubForm {
-  @Inject
+  @EJB
   private Util util;
   @EJB
   private UserDao ud;
@@ -47,8 +46,9 @@ public class ClubForm {
   
   public Club getClubForEdit(HttpServletRequest request) {
     Club club = getClub(request);
-    if (club != null)
+    if (club != null) {
       club.setId(Integer.parseInt(util.getInputValue(request, "id")));
+    }
     return club;
   }
 }

@@ -1,4 +1,4 @@
-package main.java.fr.dauphine.lamsade.hib.ads.beans;
+package main.java.fr.dauphine.lamsade.hib.ads.entities;
 
 import java.sql.Date;
 import java.util.List;
@@ -33,7 +33,7 @@ public class Club {
   private List<Footballer> footballers;
   
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public int getId() {
     return id;
   }

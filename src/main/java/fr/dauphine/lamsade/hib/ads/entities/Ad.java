@@ -1,4 +1,4 @@
-package main.java.fr.dauphine.lamsade.hib.ads.beans;
+package main.java.fr.dauphine.lamsade.hib.ads.entities;
 
 import java.sql.Date;
 

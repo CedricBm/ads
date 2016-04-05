@@ -1,14 +1,13 @@
 package main.java.fr.dauphine.lamsade.hib.ads.dao;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
-import main.java.fr.dauphine.lamsade.hib.ads.beans.Club;
+import main.java.fr.dauphine.lamsade.hib.ads.entities.Club;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.DaoException;
 
 /**
@@ -18,48 +17,39 @@ import main.java.fr.dauphine.lamsade.hib.ads.resources.DaoException;
 public class ClubDao {
   @PersistenceContext(name = "ads")
   private EntityManager em;
-  private static final Logger LOGGER = Logger.getLogger(ClubDao.class.getCanonicalName());
   
   public ClubDao() {
   }
   
-  @SuppressWarnings("unchecked")
   public List<Club> all() {
-    Query query = em.createNamedQuery("Club.all");
-    return (List<Club>) query.getResultList();
+    TypedQuery<Club> query = em.createNamedQuery("Club.all", Club.class);
+    return query.getResultList();
   }
   
-  public boolean create(Club c) {
+  public void create(Club c) {
     try {
       em.persist(c);
-      em.flush();
     } catch (Exception e) {
       throw new DaoException("Error while trying to create an club: " + e);
     }
-    
-    return true;
   }
   
   public Club find(int id) {
     return em.find(Club.class, id);
   }
   
-  public boolean save(Club c) {
+  public void save(Club c) {
     try {
       em.merge(c);
     } catch (Exception e) {
-      LOGGER.severe("Error while trying to save an club: " + e);
-      return false;
+      throw new DaoException("Error while trying to save an club: " + e);
     }
-    return true;
   }
   
-  public boolean delete(int id) {
-    Club c = find(id);
+  public void delete(int id) {
+    Club c = em.getReference(Club.class, id);
     if (c != null) {
       em.remove(c);
-      return true;
     }
-    return false;
   }
 }

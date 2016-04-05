@@ -1,4 +1,4 @@
-package main.java.fr.dauphine.lamsade.hib.ads.beans;
+package main.java.fr.dauphine.lamsade.hib.ads.entities;
 
 import java.sql.Date;
 import java.util.List;
@@ -20,8 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "footballers")
-@NamedQueries({ @NamedQuery(name = "Footballer.all", query = "select f from Footballer f"),
-    @NamedQuery(name = "Footballer.find", query = "select f from Footballer f where f.id=:id") })
+@NamedQueries({ @NamedQuery(name = "Footballer.all", query = "select f from Footballer f")})
 public class Footballer {
   private int id;
   private String fname;

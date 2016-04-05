@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.java.fr.dauphine.lamsade.hib.ads.beans.Ad;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.AdDao;
+import main.java.fr.dauphine.lamsade.hib.ads.entities.Ad;
 import main.java.fr.dauphine.lamsade.hib.ads.forms.AdForm;
 
 /**

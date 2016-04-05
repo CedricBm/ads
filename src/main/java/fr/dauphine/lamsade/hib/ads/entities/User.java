@@ -1,4 +1,4 @@
-package main.java.fr.dauphine.lamsade.hib.ads.beans;
+package main.java.fr.dauphine.lamsade.hib.ads.entities;
 
 import java.util.List;
 
@@ -18,20 +18,19 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-@NamedQueries({ @NamedQuery(name = "User.all", query = "select u from User u"),
-    @NamedQuery(name = "User.find", query = "select u from User u where u.id=:id") })
+@NamedQueries({ @NamedQuery(name = "User.all", query = "select u from User u") })
 public class User {
   private int id;
   private String fname;
   private String lname;
   private String email;
-  private String password;
+  private byte[] password;
   private Club club;
   private List<Ad> soldAds;
   private List<Ad> boughtAds;
   
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public int getId() {
     return id;
   }
@@ -64,11 +63,11 @@ public class User {
     this.email = email;
   }
   
-  public String getPassword() {
+  public byte[] getPassword() {
     return password;
   }
   
-  public void setPassword(String password) {
+  public void setPassword(byte[] password) {
     this.password = password;
   }
   
