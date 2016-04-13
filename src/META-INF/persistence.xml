@@ -10,7 +10,7 @@
 		<class>main.java.fr.dauphine.lamsade.hib.ads.entities.User</class>
 		<properties>
 			<property name="javax.persistence.schema-generation.database.action"
-				value="create" />
+				value="drop-and-create" />
 		</properties>
 	</persistence-unit>
 </persistence>
