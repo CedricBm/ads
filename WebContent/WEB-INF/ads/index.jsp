@@ -2,7 +2,7 @@
 <%@ taglib prefix="layout" tagdir="/WEB-INF/tags/layouts"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 
-<layout:landing pageTitle="Ads">
+<layout:authent pageTitle="Ads">
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br> <br>
@@ -106,4 +106,4 @@
       </div>
     </div>
   </div>
-</layout:landing>
+</layout:authent>

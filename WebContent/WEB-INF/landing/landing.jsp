@@ -11,6 +11,7 @@
           <h2 class="header center orange-text">Javaller</h2>
           <div class="row center">
             <h5 class="header col s12 light">Le site d'annonces de ventes et locations de footballers.</h5>
+            <img class="cover" src="<c:url value="/img/messi-vs-ronaldo.jpg" />" />
           </div>
         </div>
         <div class="col s12 m4">
@@ -26,17 +27,13 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <i class="material-icons prefix">explore</i> <input id="login" name="login" type="text" class="validate" required aria-required="true"> <label for="login">Login</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
                   <i class="material-icons prefix">email</i> <input id="email" name="email" type="email" class="validate" required aria-required="true"> <label for="email">Email</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <i class="material-icons prefix">security</i> <input id="password" name="password" type="password" class="validate" required aria-required="true"> <label for="password">Mot de passe</label>
+                  <i class="material-icons prefix">security</i> <input id="password" name="password" type="password" class="validate" required aria-required="true"> <label for="password">Mot
+                    de passe</label>
                 </div>
               </div>
               <div class="row">

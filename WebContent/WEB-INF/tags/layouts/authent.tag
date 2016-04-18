@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${pageTitle}- Javaller</title>
+<title>${pageTitle} - Javaller</title>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/materialize.min.css" />" />
@@ -18,7 +18,11 @@
     <div class="nav-wrapper container">
       <a id="logo-container" href="${pageContext.request.contextPath}" class="brand-logo valign-wrapper"><img src="<c:url value="/img/logo.png" />" /></a>
       <ul class="right hide-on-med-and-down">
-        <li><a class="waves-effect waves-light" href="login">Connexion</a></li>
+        <li><a class="waves-effect waves-light" href="${pageContext.request.contextPath}/users">Utilisateurs</a></li>
+        <li><a class="waves-effect waves-light" href="${pageContext.request.contextPath}/clubs">Clubs</a></li>
+        <li><a class="waves-effect waves-light" href="${pageContext.request.contextPath}/footballers">Footballers</a></li>
+        <li><a class="waves-effect waves-light" href="${pageContext.request.contextPath}/ads">Ads</a></li>
+        <li><a class="waves-effect waves-light" href="${pageContext.request.contextPath}/logout">Déconnexion</a></li>
       </ul>
     </div>
   </nav>

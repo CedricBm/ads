@@ -18,15 +18,26 @@ import main.java.fr.dauphine.lamsade.hib.ads.resources.DaoException;
 public class UserDao {
   @PersistenceContext(name = "ads")
   private EntityManager em;
-  
+
   public UserDao() {
   }
-  
+
   public List<User> all() {
     TypedQuery<User> query = em.createNamedQuery("User.all", User.class);
     return query.getResultList();
   }
-  
+
+  public User getByEmail(String email) {
+    TypedQuery<User> query = em.createNamedQuery("User.getByEmail", User.class);
+    query.setParameter("email", email);
+    try {
+      return query.getSingleResult();
+    } catch (Exception e) {
+      // If the user is not found, we return a null value.
+      return null;
+    }
+  }
+
   public void create(User u) {
     try {
       em.persist(u);
@@ -34,11 +45,11 @@ public class UserDao {
       throw new DaoException("Error while trying to create a user: " + e);
     }
   }
-  
+
   public User find(int id) {
     return em.find(User.class, id);
   }
-  
+
   public void save(User u) {
     try {
       em.merge(u);
@@ -46,7 +57,7 @@ public class UserDao {
       throw new DaoException("Error while trying to save a user: " + e);
     }
   }
-  
+
   public void delete(int id) {
     User u = em.getReference(User.class, id);
     if (u != null) {
