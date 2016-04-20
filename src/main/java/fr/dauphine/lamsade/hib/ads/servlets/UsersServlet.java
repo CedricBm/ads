@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import main.java.fr.dauphine.lamsade.hib.ads.dao.UserDao;
 import main.java.fr.dauphine.lamsade.hib.ads.entities.User;
@@ -33,6 +34,11 @@ public class UsersServlet extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     request.setAttribute("users", ud.all());
+    HttpSession session = request.getSession();
+    if (session.getAttribute("notice") != null) {
+      request.setAttribute("notice", session.getAttribute("notice"));
+      session.removeAttribute("notice");
+    }
     LOGGER.info("GET /users");
     this.getServletContext().getRequestDispatcher("/WEB-INF/users/index.jsp").forward(request, response);
   }
