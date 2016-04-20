@@ -12,6 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  * @author cedric beaumont
@@ -22,10 +23,12 @@ import javax.persistence.Table;
 @NamedQueries({ @NamedQuery(name = "User.all", query = "select u from User u"), @NamedQuery(name = "User.getByEmail", query = "select u from User u where u.email = :email") })
 public class User {
   private int id;
+  private int version;
   private String fname;
   private String lname;
   private String email;
   private byte[] password;
+  private float solde;
   private Club club;
   private List<Ad> soldAds;
   private List<Ad> boughtAds;
@@ -38,6 +41,15 @@ public class User {
 
   public void setId(int id) {
     this.id = id;
+  }
+
+  @Version
+  public int getVersion() {
+    return version;
+  }
+
+  public void setVersion(int version) {
+    this.version = version;
   }
 
   public String getFname() {
@@ -70,6 +82,14 @@ public class User {
 
   public void setPassword(byte[] password) {
     this.password = password;
+  }
+
+  public float getSolde() {
+    return solde;
+  }
+
+  public void setSolde(float solde) {
+    this.solde = solde;
   }
 
   @OneToOne(mappedBy = "manager", fetch = FetchType.EAGER)

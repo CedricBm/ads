@@ -39,6 +39,7 @@ public class UserDao {
   }
 
   public void create(User u) {
+    u.setSolde(1000000000000f);
     try {
       em.persist(u);
     } catch (Exception e) {
@@ -62,6 +63,22 @@ public class UserDao {
     User u = em.getReference(User.class, id);
     if (u != null) {
       em.remove(u);
+    }
+  }
+
+  public void deposit(int id, float amount) {
+    User u = em.find(User.class, id);
+    if (u != null) {
+      u.setSolde(u.getSolde() + amount);
+      save(u);
+    }
+  }
+
+  public void withdraw(int id, float amount) {
+    User u = em.find(User.class, id);
+    if (u != null) {
+      u.setSolde(u.getSolde() - amount);
+      save(u);
     }
   }
 }

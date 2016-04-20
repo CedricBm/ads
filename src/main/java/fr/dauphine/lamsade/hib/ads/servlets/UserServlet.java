@@ -26,18 +26,18 @@ public class UserServlet extends HttpServlet {
   private UserDao ud;
   @EJB
   private UserForm uf;
-  
+
   public UserServlet() throws NamingException {
     super();
   }
-  
+
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     User u = ud.find(Integer.parseInt(request.getParameter("id")));
     request.setAttribute("user", u);
     LOGGER.info("GET /user with id: " + u.getId());
     this.getServletContext().getRequestDispatcher("/WEB-INF/users/edit.jsp").forward(request, response);
   }
-  
+
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     User u = uf.getUserForEdit(request);
     ud.save(u);
