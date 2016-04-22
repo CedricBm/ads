@@ -20,7 +20,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "clubs")
-@NamedQueries({ @NamedQuery(name = "Club.all", query = "select c from Club c") })
+@NamedQueries({ @NamedQuery(name = "Club.all", query = "select c from Club c"),
+  @NamedQuery(name = "Club.getByManager", query = "select c from Club c where c.manager.id = :idManager")})
 public class Club {
   private int id;
   private String name;

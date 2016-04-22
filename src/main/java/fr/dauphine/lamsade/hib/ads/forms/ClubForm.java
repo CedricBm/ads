@@ -54,8 +54,4 @@ public class ClubForm {
     }
     return club;
   }
-
-  public Club getClubForBuy(HttpServletRequest request) {
-    return cd.find(Integer.parseInt(util.getInputValue(request, "club_id")));
-  }
 }

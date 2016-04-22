@@ -52,4 +52,11 @@ public class ClubDao {
       em.remove(c);
     }
   }
+  
+  public Club getByManager(int idManager)
+  {
+    TypedQuery<Club> query = em.createNamedQuery("Club.getByManager", Club.class);
+    query.setParameter("idManager", idManager);
+    return query.getSingleResult();
+  }
 }
