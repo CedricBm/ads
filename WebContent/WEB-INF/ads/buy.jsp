@@ -14,7 +14,9 @@
           <div class="row">
             <form class="col s6 offset-s3" method="post">
               <input id="id" name="id" type="hidden" required aria-required="true" value="${ad.id}">
-              <input id="id" name="buyer_id" type="hidden" required aria-required="true" value="${user.id}">
+              <input id="buyer_id" name="buyer_id" type="hidden" required aria-required="true" value="${user.id}">
+              <input id="footballer_id" name="footballer_id" type="hidden" required aria-required="true" value="${ad.footballer.id}">
+              <input id="club_id" name="club_id" type="hidden" required aria-required="true" value="${user.club.id}">
               <div class="row">
                 <button class="waves-effect waves-light btn" type="submit">Acheter</button>
               </div>

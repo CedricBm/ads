@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import main.java.fr.dauphine.lamsade.hib.ads.entities.Club;
 import main.java.fr.dauphine.lamsade.hib.ads.entities.Footballer;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.DaoException;
 
@@ -53,5 +54,11 @@ public class FootballerDao {
     if (f != null) {
       em.remove(f);
     }
+  }
+  
+  public void changeClub(int id, Club club) {
+    Footballer f = em.find(Footballer.class, id);
+    f.setClub(club);
+    save(f);
   }
 }

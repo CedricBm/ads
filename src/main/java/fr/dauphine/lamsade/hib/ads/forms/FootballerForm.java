@@ -9,7 +9,9 @@ import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 
 import main.java.fr.dauphine.lamsade.hib.ads.dao.ClubDao;
+import main.java.fr.dauphine.lamsade.hib.ads.dao.FootballerDao;
 import main.java.fr.dauphine.lamsade.hib.ads.entities.Footballer;
+import main.java.fr.dauphine.lamsade.hib.ads.entities.User;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.FormException;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.Util;
 
@@ -23,6 +25,8 @@ public class FootballerForm {
   private Util util;
   @EJB
   private ClubDao cd;
+  @EJB
+  private FootballerDao fd;
   
   public Footballer getFootballer(HttpServletRequest request) {
     
@@ -54,5 +58,9 @@ public class FootballerForm {
     Footballer f = getFootballer(request);
     f.setId(Integer.parseInt(util.getInputValue(request, "id")));
     return f;
+  }
+  
+  public Footballer getFootballerForBuy(HttpServletRequest request) {
+    return fd.find(Integer.parseInt(util.getInputValue(request, "footballer_id")));
   }
 }

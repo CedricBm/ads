@@ -12,10 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.fr.dauphine.lamsade.hib.ads.dao.AdDao;
+import main.java.fr.dauphine.lamsade.hib.ads.dao.FootballerDao;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.UserDao;
 import main.java.fr.dauphine.lamsade.hib.ads.entities.Ad;
+import main.java.fr.dauphine.lamsade.hib.ads.entities.Club;
+import main.java.fr.dauphine.lamsade.hib.ads.entities.Footballer;
 import main.java.fr.dauphine.lamsade.hib.ads.entities.User;
 import main.java.fr.dauphine.lamsade.hib.ads.forms.AdForm;
+import main.java.fr.dauphine.lamsade.hib.ads.forms.ClubForm;
+import main.java.fr.dauphine.lamsade.hib.ads.forms.FootballerForm;
 import main.java.fr.dauphine.lamsade.hib.ads.forms.UserForm;
 
 /**
@@ -33,6 +38,12 @@ public class AdBuyServlet extends HttpServlet {
   private UserDao ud;
   @EJB
   private UserForm uf;
+  @EJB
+  private FootballerDao fd;
+  @EJB
+  private FootballerForm ff;
+  @EJB
+  private ClubForm cf;
   
   public AdBuyServlet() throws NamingException {
     super();
@@ -52,6 +63,9 @@ public class AdBuyServlet extends HttpServlet {
       if(u != null)
       {
         ud.withdraw(u.getId(), a.getPrice());
+        Footballer f = ff.getFootballerForBuy(request);
+        Club c = cf.getClubForBuy(request);
+        fd.changeClub(f.getId(), c);
         ad.buy(a.getId(), u);
       }
       request.setAttribute("error", null);

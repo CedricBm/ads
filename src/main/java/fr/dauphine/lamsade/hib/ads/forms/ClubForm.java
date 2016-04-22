@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 
+import main.java.fr.dauphine.lamsade.hib.ads.dao.ClubDao;
 import main.java.fr.dauphine.lamsade.hib.ads.dao.UserDao;
 import main.java.fr.dauphine.lamsade.hib.ads.entities.Club;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.FormException;
@@ -22,6 +23,8 @@ public class ClubForm {
   private Util util;
   @EJB
   private UserDao ud;
+  @EJB
+  private ClubDao cd; 
   
   public Club getClub(HttpServletRequest request) {
     
@@ -50,5 +53,9 @@ public class ClubForm {
       club.setId(Integer.parseInt(util.getInputValue(request, "id")));
     }
     return club;
+  }
+
+  public Club getClubForBuy(HttpServletRequest request) {
+    return cd.find(Integer.parseInt(util.getInputValue(request, "club_id")));
   }
 }
