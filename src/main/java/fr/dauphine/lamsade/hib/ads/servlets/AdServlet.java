@@ -73,8 +73,8 @@ public class AdServlet extends HttpServlet {
       } catch (ParseException e) {
       }
       java.sql.Date date = new java.sql.Date(parsed.getTime());
-      int sellerId = (util.getInputValue(request, "sellerId") == null ? 0 : Integer.parseInt(util.getInputValue(request, "sellerId")));
-      int footballerId = (util.getInputValue(request, "footballerId") == null ? 0 : Integer.parseInt(util.getInputValue(request, "footballerId")));
+      int sellerId = (util.getInputValue(request, "seller_id") == null ? 0 : Integer.parseInt(util.getInputValue(request, "seller_id")));
+      int footballerId = (util.getInputValue(request, "footballer_id") == null ? 0 : Integer.parseInt(util.getInputValue(request, "footballer_id")));
       request.setAttribute("ads", ad.findMultiple(titre, prix, desc, date,sellerId,footballerId));
       request.setAttribute("error", null);
       LOGGER.info("POST /ads");
