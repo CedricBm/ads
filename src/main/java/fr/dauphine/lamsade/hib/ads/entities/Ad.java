@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ads")
 @NamedQueries({ @NamedQuery(name = "Ad.all", query = "select a from Ad a"),
-    @NamedQuery(name = "Ad.search", query = "select a from Ad a where a.title like :title and a.price >= :price and a.description like :description and a.availableAt >= :availableAt") })
+    @NamedQuery(name = "Ad.search", query = "select a from Ad a where a.title like :title and a.price >= :price and a.description like :description and a.availableAt >= :availableAt and a.seller.id = :sellerId and a.footballer.id = :footballerId") })
 public class Ad {
   private int id;
   private String title;
@@ -91,7 +91,7 @@ public class Ad {
     this.available = isAvailable;
   }
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "seller_id")
   public User getSeller() {
     return seller;
@@ -101,7 +101,7 @@ public class Ad {
     this.seller = seller;
   }
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "buyer_id")
   public User getBuyer() {
     return buyer;
@@ -111,7 +111,7 @@ public class Ad {
     this.buyer = buyer;
   }
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "footballer_id")
   public Footballer getFootballer() {
     return footballer;
