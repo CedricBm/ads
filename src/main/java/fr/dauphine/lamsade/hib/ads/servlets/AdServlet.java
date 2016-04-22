@@ -73,7 +73,9 @@ public class AdServlet extends HttpServlet {
       } catch (ParseException e) {
       }
       java.sql.Date date = new java.sql.Date(parsed.getTime());
-      request.setAttribute("ads", ad.findMultiple(titre, prix, desc, date));
+      int sellerId = (util.getInputValue(request, "sellerId") == null ? 0 : Integer.parseInt(util.getInputValue(request, "sellerId")));
+      int footballerId = (util.getInputValue(request, "footballerId") == null ? 0 : Integer.parseInt(util.getInputValue(request, "footballerId")));
+      request.setAttribute("ads", ad.findMultiple(titre, prix, desc, date,sellerId,footballerId));
       request.setAttribute("error", null);
       LOGGER.info("POST /ads");
       this.getServletContext().getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
