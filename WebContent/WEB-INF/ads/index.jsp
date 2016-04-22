@@ -66,11 +66,11 @@
               <th>Titre</th>
               <th>Prix</th>
               <th>Description</th>
-              <th>Achetable</th>
               <th>Date dispo</th>
               <th>Nom Acheteur</th>
               <th>Nom Vendeur</th>
               <th>Nom Joueur</th>
+              <th>Acheter</th>
               <th>Modifier</th>
               <th>Supprimer</th>
             </tr>
@@ -82,11 +82,15 @@
                 <td>${ad.title}</td>
                 <td>${ad.price}</td>
                 <td>${ad.description}</td>
-                <td>${ad.buyable}</td>
                 <td>${ad.availableAt}</td>
                 <td>${ad.buyer.lname}</td>
                 <td>${ad.seller.lname}</td>
                 <td>${ad.footballer.lname}</td>
+                <td><c:choose>
+                <c:when test="${user.id == ad.seller.id}">C'est votre offre</c:when>
+                <c:when test="${!empty ad.buyer}">Cette offre a déjà été vendue</c:when>
+                <c:otherwise>
+                <a href="${pageContext.request.contextPath}/ads/buy?id=${ad.id}" class="waves-effect waves-light btn">Acheter</a></c:choose></td>
                 <td><a href="${pageContext.request.contextPath}/ads/modify?id=${ad.id}" class="waves-effect waves-light btn">Modifier</a></td>
                 <td><a href="${pageContext.request.contextPath}/ads/delete?id=${ad.id}" class="waves-effect waves-light btn">Supprimer</a></td>
               </tr>
