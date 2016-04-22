@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ads")
 @NamedQueries({ @NamedQuery(name = "Ad.all", query = "select a from Ad a"),
-    @NamedQuery(name = "Ad.search", query = "select a from Ad a where a.title like :title and a.price >= :price and a.description like :description and a.availableAt >= :availableAt and a.seller.id = :sellerId and a.footballer.id = :footballerId") })
+    @NamedQuery(name = "Ad.search", query = "select a from Ad a where a.title like :title and a.price >= :price and a.description like :description and a.availableAt >= :availableAt and a.seller.id >= :sellerId and a.footballer.id >= :footballerId") })
 public class Ad {
   private int id;
   private String title;

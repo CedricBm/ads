@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import main.java.fr.dauphine.lamsade.hib.ads.entities.Ad;
+import main.java.fr.dauphine.lamsade.hib.ads.entities.User;
 import main.java.fr.dauphine.lamsade.hib.ads.resources.DaoException;
 
 /**
@@ -65,5 +66,11 @@ public class AdDao {
     if (a != null) {
       em.remove(a);
     }
+  }
+  
+  public void buy(int id,User u) {
+   Ad a = em.find(Ad.class, id);
+   a.setBuyer(u);
+   save(a);
   }
 }

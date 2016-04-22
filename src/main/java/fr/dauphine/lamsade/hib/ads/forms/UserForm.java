@@ -38,4 +38,8 @@ public class UserForm {
 
     return user;
   }
+  
+  public User getUserForBuy(HttpServletRequest request) {
+    return ud.find(Integer.parseInt(util.getInputValue(request, "buyer_id")));
+  }
 }

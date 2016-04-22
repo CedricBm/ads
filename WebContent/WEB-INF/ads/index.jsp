@@ -90,7 +90,7 @@
                 <c:when test="${user.id == ad.seller.id}">C'est votre offre</c:when>
                 <c:when test="${!empty ad.buyer}">Cette offre a déjà été vendue</c:when>
                 <c:otherwise>
-                <a href="${pageContext.request.contextPath}/ads/buy?id=${ad.id}" class="waves-effect waves-light btn">Acheter</a></c:choose></td>
+                <a href="${pageContext.request.contextPath}/ads/buy?id=${ad.id}" class="waves-effect waves-light btn">Acheter</a></c:otherwise></c:choose></td>
                 <td><a href="${pageContext.request.contextPath}/ads/modify?id=${ad.id}" class="waves-effect waves-light btn">Modifier</a></td>
                 <td><a href="${pageContext.request.contextPath}/ads/delete?id=${ad.id}" class="waves-effect waves-light btn">Supprimer</a></td>
               </tr>
