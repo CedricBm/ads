@@ -41,12 +41,14 @@ public class AdDao {
     return em.find(Ad.class, id);
   }
 
-  public List<Ad> findMultiple(String titre, float prix, String desc, Date date) {
+  public List<Ad> findMultiple(String titre, float prix, String desc, Date date, int sellerId, int footballerId) {
     TypedQuery<Ad> query = em.createNamedQuery("Ad.search", Ad.class);
     query.setParameter("title", "%" + titre + "%");
     query.setParameter("price", prix);
     query.setParameter("description", "%" + desc + "%");
     query.setParameter("availableAt", date);
+    query.setParameter("sellerId", sellerId);
+    query.setParameter("footballerId", footballerId);
     return query.getResultList();
   }
 
